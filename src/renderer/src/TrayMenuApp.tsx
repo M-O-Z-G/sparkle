@@ -5,6 +5,7 @@ import { useGroups } from './hooks/use-groups'
 import { mihomoChangeProxy, mihomoGroupDelay, mihomoCloseAllConnections } from './utils/ipc'
 import { useAppConfig } from './hooks/use-app-config'
 import { calcTraffic } from './utils/calc'
+import { useTranslation } from 'react-i18next'
 
 interface TrafficData {
   up: number
@@ -12,12 +13,17 @@ interface TrafficData {
 }
 
 const TrayMenuApp: React.FC = () => {
+  const { t, i18n } = useTranslation()
   const { groups, mutate } = useGroups()
   const { appConfig } = useAppConfig()
-  const { autoCloseConnection } = appConfig || {}
+  const { autoCloseConnection, language = 'en' } = appConfig || {}
 
   const [traffic, setTraffic] = useState<TrafficData>({ up: 0, down: 0 })
   const [testingGroup, setTestingGroup] = useState<string | null>(null)
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language, i18n])
 
   useEffect(() => {
     window.electron.ipcRenderer.on('mihomoTraffic', (_e, info: TrafficData) => {
@@ -137,7 +143,7 @@ const TrayMenuApp: React.FC = () => {
       <ScrollShadow className="flex-1 overflow-y-auto">
         {!groups || groups.length === 0 ? (
           <div className="flex items-center justify-center h-full text-default-400 text-sm">
-            暂无数据
+            {t('tray.noData')}
           </div>
         ) : (
           <Accordion

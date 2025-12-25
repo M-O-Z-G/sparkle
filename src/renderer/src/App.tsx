@@ -1,6 +1,7 @@
 import { useTheme } from 'next-themes'
 import { useEffect, useRef, useState } from 'react'
 import { NavigateFunction, useLocation, useNavigate, useRoutes } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import OutboundModeSwitcher from '@renderer/components/sider/outbound-mode-switcher'
 import SysproxySwitcher from '@renderer/components/sider/sysproxy-switcher'
 import TunSwitcher from '@renderer/components/sider/tun-switcher'
@@ -55,6 +56,7 @@ const defaultSiderOrder = [
 ]
 
 const App: React.FC = () => {
+  const { t, i18n } = useTranslation()
   const { appConfig, patchAppConfig } = useAppConfig()
   const {
     appTheme = 'system',
@@ -64,7 +66,8 @@ const App: React.FC = () => {
     siderOrder,
     autoCheckUpdate,
     updateChannel = 'stable',
-    disableAnimation = false
+    disableAnimation = false,
+    language = 'en'
   } = appConfig || {}
   const siderOrderArray = siderOrder ?? defaultSiderOrder
   const narrowWidth = platform === 'darwin' ? 70 : 60
@@ -123,6 +126,10 @@ const App: React.FC = () => {
     setTheme(appTheme)
     setTitlebar()
   }, [appTheme, systemTheme])
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [language, i18n])
 
   useEffect(() => {
     applyTheme(customTheme || 'default.css').then(() => {
@@ -269,18 +276,18 @@ const App: React.FC = () => {
     >
       {showQuitConfirm && (
         <ConfirmModal
-          title="确定要退出 Sparkle 吗？"
+          title={t('quit.confirm.title')}
           description={
             <div>
               <p></p>
-              <p className="text-sm text-gray-500 mt-2">退出后代理功能将停止工作</p>
+              <p className="text-sm text-gray-500 mt-2">{t('quit.confirm.description')}</p>
               <p className="text-sm text-gray-400 mt-1">
-                快按两次或长按 {platform === 'darwin' ? '⌘Q' : 'Ctrl+Q'} 可直接退出
+                {t('quit.confirm.tip', { key: platform === 'darwin' ? '⌘Q' : 'Ctrl+Q' })}
               </p>
             </div>
           }
-          confirmText="退出"
-          cancelText="取消"
+          confirmText={t('quit.confirm.button')}
+          cancelText={t('cancel')}
           onChange={(open) => {
             if (!open) {
               handleQuitConfirm(false)
@@ -291,20 +298,22 @@ const App: React.FC = () => {
       )}
       {showProfileInstallConfirm && profileInstallData && (
         <ConfirmModal
-          title="确定要导入订阅配置吗？"
+          title={t('profileInstall.confirm.title')}
           description={
             <div>
               <p className="text-sm text-gray-600 mb-2">
-                名称：{profileInstallData.name || '未命名'}
+                {t('profileInstall.confirm.name', {
+                  name: profileInstallData.name || t('profile.name')
+                })}
               </p>
-              <p className="text-sm text-gray-600 mb-2">链接：{profileInstallData.url}</p>
-              <p className="text-sm text-orange-500 mt-2">
-                请确保订阅配置来源可信，恶意配置可能影响您的网络安全
+              <p className="text-sm text-gray-600 mb-2">
+                {t('profileInstall.confirm.url', { url: profileInstallData.url })}
               </p>
+              <p className="text-sm text-orange-500 mt-2">{t('profileInstall.confirm.warning')}</p>
             </div>
           }
-          confirmText="导入"
-          cancelText="取消"
+          confirmText={t('profileInstall.confirm.button')}
+          cancelText={t('cancel')}
           onChange={(open) => {
             if (!open) {
               handleProfileInstallConfirm(false)
@@ -316,20 +325,22 @@ const App: React.FC = () => {
       )}
       {showOverrideInstallConfirm && overrideInstallData && (
         <ConfirmModal
-          title="确定要导入覆写文件吗？"
+          title={t('overrideInstall.confirm.title')}
           description={
             <div>
               <p className="text-sm text-gray-600 mb-2">
-                名称：{overrideInstallData.name || '未命名'}
+                {t('overrideInstall.confirm.name', {
+                  name: overrideInstallData.name || t('override.name')
+                })}
               </p>
-              <p className="text-sm text-gray-600 mb-2">链接：{overrideInstallData.url}</p>
-              <p className="text-sm text-orange-500 mt-2">
-                请确保覆写文件来源可信，恶意覆写文件可能影响您的网络安全
+              <p className="text-sm text-gray-600 mb-2">
+                {t('overrideInstall.confirm.url', { url: overrideInstallData.url })}
               </p>
+              <p className="text-sm text-orange-500 mt-2">{t('overrideInstall.confirm.warning')}</p>
             </div>
           }
-          confirmText="导入"
-          cancelText="取消"
+          confirmText={t('overrideInstall.confirm.button')}
+          cancelText={t('cancel')}
           onChange={(open) => {
             if (!open) {
               handleOverrideInstallConfirm(false)

@@ -7,15 +7,17 @@ import { checkAutoRun, disableAutoRun, enableAutoRun, relaunchApp } from '@rende
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import { IoIosHelpCircle } from 'react-icons/io'
 import ConfirmModal from '../base/base-confirm'
+import { useTranslation } from 'react-i18next'
 
 const GeneralConfig: React.FC = () => {
+  const { t } = useTranslation()
   const { data: enable, mutate: mutateEnable } = useSWR('checkAutoRun', checkAutoRun)
   const { appConfig, patchAppConfig } = useAppConfig()
   const {
     silentStart = false,
     autoCheckUpdate,
     updateChannel = 'stable',
-
+    language = 'en',
     disableGPU = false,
     disableAnimation = false
   } = appConfig || {}
@@ -27,14 +29,14 @@ const GeneralConfig: React.FC = () => {
     <>
       {showRestartConfirm && (
         <ConfirmModal
-          title="确定要重启应用吗？"
+          title={t('general.restartConfirm.title')}
           description={
             <div>
-              <p>修改 GPU 加速设置需要重启应用才能生效</p>
+              <p>{t('general.restartConfirm.description')}</p>
             </div>
           }
-          confirmText="重启"
-          cancelText="取消"
+          confirmText={t('restart')}
+          cancelText={t('cancel')}
           onChange={(open) => {
             if (!open) {
               setPendingDisableGPU(disableGPU)
@@ -51,7 +53,21 @@ const GeneralConfig: React.FC = () => {
         />
       )}
       <SettingCard>
-        <SettingItem title="开机自启" divider>
+        <SettingItem title={t('settings.language')} divider>
+          <Tabs
+            size="sm"
+            color="primary"
+            selectedKey={language}
+            onSelectionChange={async (v) => {
+              patchAppConfig({ language: v as 'en' | 'ru' | 'fa' })
+            }}
+          >
+            <Tab key="en" title="English" />
+            <Tab key="ru" title="Русский" />
+            <Tab key="fa" title="فارسی" />
+          </Tabs>
+        </SettingItem>
+        <SettingItem title={t('general.autoStart')} divider>
           <Switch
             size="sm"
             isSelected={enable}
@@ -70,7 +86,7 @@ const GeneralConfig: React.FC = () => {
             }}
           />
         </SettingItem>
-        <SettingItem title="静默启动" divider>
+        <SettingItem title={t('general.silentStart')} divider>
           <Switch
             size="sm"
             isSelected={silentStart}
@@ -79,7 +95,7 @@ const GeneralConfig: React.FC = () => {
             }}
           />
         </SettingItem>
-        <SettingItem title="自动检查更新" divider>
+        <SettingItem title={t('general.autoCheckUpdate')} divider>
           <Switch
             size="sm"
             isSelected={autoCheckUpdate}
@@ -88,7 +104,7 @@ const GeneralConfig: React.FC = () => {
             }}
           />
         </SettingItem>
-        <SettingItem title="更新通道" divider>
+        <SettingItem title={t('general.updateChannel')} divider>
           <Tabs
             size="sm"
             color="primary"
@@ -97,15 +113,15 @@ const GeneralConfig: React.FC = () => {
               patchAppConfig({ updateChannel: v as 'stable' | 'beta' })
             }}
           >
-            <Tab key="stable" title="正式版" />
-            <Tab key="beta" title="测试版" />
+            <Tab key="stable" title={t('general.updateChannel.stable')} />
+            <Tab key="beta" title={t('general.updateChannel.beta')} />
           </Tabs>
         </SettingItem>
 
         <SettingItem
-          title="禁用 GPU 加速"
+          title={t('general.disableGPU')}
           actions={
-            <Tooltip content="开启后，应用将禁用 GPU 加速，可能会提高稳定性，但会降低性能">
+            <Tooltip content={t('general.disableGPU.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
@@ -123,9 +139,9 @@ const GeneralConfig: React.FC = () => {
           />
         </SettingItem>
         <SettingItem
-          title="禁用动画"
+          title={t('general.disableAnimation')}
           actions={
-            <Tooltip content="开启后，应用将减轻绝大部分动画效果，可能会提高性能">
+            <Tooltip content={t('general.disableAnimation.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
