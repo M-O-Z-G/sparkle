@@ -16,7 +16,7 @@ const TrayMenuApp: React.FC = () => {
   const { t, i18n } = useTranslation()
   const { groups, mutate } = useGroups()
   const { appConfig } = useAppConfig()
-  const { autoCloseConnection, language = 'en' } = appConfig || {}
+  const { autoCloseConnection, language = 'en-US' } = appConfig || {}
 
   const [traffic, setTraffic] = useState<TrafficData>({ up: 0, down: 0 })
   const [testingGroup, setTestingGroup] = useState<string | null>(null)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SettingCard from '../base/base-setting-card'
 import SettingItem from '../base/base-setting-item'
-import { Button, Switch, Tab, Tabs, Tooltip } from '@heroui/react'
+import { Button, Switch, Tab, Tabs, Tooltip, Select, SelectItem } from '@heroui/react'
 import useSWR from 'swr'
 import { checkAutoRun, disableAutoRun, enableAutoRun, relaunchApp } from '@renderer/utils/ipc'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
@@ -10,14 +10,14 @@ import ConfirmModal from '../base/base-confirm'
 import { useTranslation } from 'react-i18next'
 
 const GeneralConfig: React.FC = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { data: enable, mutate: mutateEnable } = useSWR('checkAutoRun', checkAutoRun)
   const { appConfig, patchAppConfig } = useAppConfig()
   const {
     silentStart = false,
     autoCheckUpdate,
     updateChannel = 'stable',
-    language = 'en',
+    language = 'en-US',
     disableGPU = false,
     disableAnimation = false
   } = appConfig || {}
@@ -54,18 +54,23 @@ const GeneralConfig: React.FC = () => {
       )}
       <SettingCard>
         <SettingItem title={t('settings.language')} divider>
-          <Tabs
+          <Select
+            classNames={{ trigger: 'data-[hover=true]:bg-default-200' }}
+            className="w-[150px]"
             size="sm"
-            color="primary"
-            selectedKey={language}
+            selectedKeys={[language]}
+            aria-label={t('settings.language')}
             onSelectionChange={async (v) => {
-              patchAppConfig({ language: v as 'en' | 'ru' | 'fa' })
+              const newLang = Array.from(v)[0] as 'en-US' | 'zh-CN' | 'ru-RU' | 'fa-IR'
+              await patchAppConfig({ language: newLang })
+              i18n.changeLanguage(newLang)
             }}
           >
-            <Tab key="en" title="English" />
-            <Tab key="ru" title="Русский" />
-            <Tab key="fa" title="فارسی" />
-          </Tabs>
+            <SelectItem key="en-US">English</SelectItem>
+            <SelectItem key="zh-CN">简体中文</SelectItem>
+            <SelectItem key="ru-RU">Русский</SelectItem>
+            <SelectItem key="fa-IR">فارسی</SelectItem>
+          </Select>
         </SettingItem>
         <SettingItem title={t('general.autoStart')} divider>
           <Switch
