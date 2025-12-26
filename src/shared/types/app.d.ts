@@ -113,7 +113,7 @@ interface AppConfig {
   displayAppName?: boolean
   disableGPU: boolean
   disableAnimation?: boolean
-  language?: 'en' | 'ru' | 'fa'
+  language?: 'en-US' | 'zh-CN' | 'ru-RU' | 'fa-IR'
 }
 
 interface ProfileConfig {

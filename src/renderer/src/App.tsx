@@ -67,7 +67,7 @@ const App: React.FC = () => {
     autoCheckUpdate,
     updateChannel = 'stable',
     disableAnimation = false,
-    language = 'en'
+    language = 'en-US'
   } = appConfig || {}
   const siderOrderArray = siderOrder ?? defaultSiderOrder
   const narrowWidth = platform === 'darwin' ? 70 : 60
