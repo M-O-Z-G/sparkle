@@ -25,7 +25,7 @@ export async function patchControledMihomoConfig(patch: Partial<MihomoConfig>): 
     delete controledMihomoConfig.dns
     delete controledMihomoConfig.hosts
   } else {
-    // 从不接管状态恢复
+    // Restore from non-control state
     if (controledMihomoConfig.dns?.ipv6 === undefined) {
       controledMihomoConfig.dns = defaultControledMihomoConfig.dns
     }
@@ -33,7 +33,7 @@ export async function patchControledMihomoConfig(patch: Partial<MihomoConfig>): 
   if (!controlSniff) {
     delete controledMihomoConfig.sniffer
   } else {
-    // 从不接管状态恢复
+    // Restore from non-control state
     if (!controledMihomoConfig.sniffer) {
       controledMihomoConfig.sniffer = defaultControledMihomoConfig.sniffer
     }

@@ -8,6 +8,7 @@ import BaseErrorBoundary from './components/base/base-error-boundary'
 import { AppConfigProvider } from './hooks/use-app-config'
 import { ControledMihomoConfigProvider } from './hooks/use-controled-mihomo-config'
 import { GroupsProvider } from './hooks/use-groups'
+import './locales/i18n'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
