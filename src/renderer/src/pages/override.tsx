@@ -11,6 +11,7 @@ import BasePage from '@renderer/components/base/base-page'
 import { getFilePath, readTextFile } from '@renderer/utils/ipc'
 import { useEffect, useRef, useState } from 'react'
 import { MdContentPaste } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 import {
   DndContext,
   closestCenter,
@@ -30,6 +31,7 @@ import { RiArchiveLine } from 'react-icons/ri'
 const emptyItems: OverrideItem[] = []
 
 const Override: React.FC = () => {
+  const { t } = useTranslation()
   const {
     overrideConfig,
     setOverrideConfig,
@@ -123,10 +125,10 @@ const Override: React.FC = () => {
               ext: file.name.endsWith('.js') ? 'js' : 'yaml'
             })
           } catch (e) {
-            alert('文件导入失败' + e)
+            alert(t('override.fileImportFailed') + e)
           }
         } else {
-          alert('不支持的文件类型')
+          alert(t('override.unsupportedFileType'))
         }
       }
       isProcessingDrop.current = false
@@ -146,13 +148,13 @@ const Override: React.FC = () => {
   return (
     <BasePage
       ref={pageRef}
-      title="覆写"
+      title={t('override.title')}
       header={
         <>
           <Button
             size="sm"
             variant="light"
-            title="使用文档"
+            title={t('override.documentation')}
             isIconOnly
             className="app-nodrag"
             onPress={() => {
@@ -163,7 +165,7 @@ const Override: React.FC = () => {
           </Button>
           <Button
             className="app-nodrag"
-            title="常用覆写仓库"
+            title={t('override.repo')}
             isIconOnly
             variant="light"
             size="sm"
@@ -205,7 +207,7 @@ const Override: React.FC = () => {
             isLoading={importing}
             onPress={handleImport}
           >
-            导入
+            {t('profiles.import')}
           </Button>
           <Dropdown>
             <DropdownTrigger>
@@ -233,14 +235,14 @@ const Override: React.FC = () => {
                   }
                 } else if (key === 'new-yaml') {
                   await addOverrideItem({
-                    name: '新建 YAML',
+                    name: t('override.createYAML'),
                     type: 'local',
                     file: '# https://mihomo.party/docs/guide/override/yaml',
                     ext: 'yaml'
                   })
                 } else if (key === 'new-js') {
                   await addOverrideItem({
-                    name: '新建 JS',
+                    name: t('override.createJS'),
                     type: 'local',
                     file: '// https://mihomo.party/docs/guide/override/javascript\nfunction main(config) {\n  return config\n}',
                     ext: 'js'
@@ -259,10 +261,10 @@ const Override: React.FC = () => {
                 }
               }}
             >
-              <DropdownItem key="open">打开本地覆写</DropdownItem>
-              <DropdownItem key="import">导入远程覆写</DropdownItem>
-              <DropdownItem key="new-yaml">新建 YAML</DropdownItem>
-              <DropdownItem key="new-js">新建 JavaScript</DropdownItem>
+              <DropdownItem key="open">{t('profiles.openLocal')}</DropdownItem>
+              <DropdownItem key="import">{t('profiles.importRemote')}</DropdownItem>
+              <DropdownItem key="new-yaml">{t('override.createYAML')}</DropdownItem>
+              <DropdownItem key="new-js">{t('override.createJS')}</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </div>

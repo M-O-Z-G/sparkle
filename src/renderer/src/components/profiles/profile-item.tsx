@@ -15,6 +15,7 @@ import { calcPercent, calcTraffic } from '@renderer/utils/calc'
 import { IoMdMore, IoMdRefresh } from 'react-icons/io'
 import dayjs from 'dayjs'
 import React, { Key, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import EditFileModal from './edit-file-modal'
 import EditInfoModal from './edit-info-modal'
 import { useSortable } from '@dnd-kit/sortable'
@@ -42,6 +43,7 @@ interface MenuItem {
   className: string
 }
 const ProfileItem: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const {
     info,
     addProfileItem,
@@ -79,28 +81,28 @@ const ProfileItem: React.FC<Props> = (props) => {
     const list = [
       {
         key: 'edit-info',
-        label: '编辑信息',
+        label: t('edit'),
         showDivider: false,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'edit-file',
-        label: '编辑文件',
+        label: t('appearance.editTheme'),
         showDivider: false,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'open-file',
-        label: '打开文件',
+        label: t('profile.upload'),
         showDivider: true,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'delete',
-        label: '删除',
+        label: t('delete'),
         showDivider: false,
         color: 'danger',
         className: 'text-danger'
@@ -109,7 +111,7 @@ const ProfileItem: React.FC<Props> = (props) => {
     if (info.home) {
       list.unshift({
         key: 'home',
-        label: '主页',
+        label: t('profile.home'),
         showDivider: false,
         color: 'default',
         className: ''
@@ -184,9 +186,9 @@ const ProfileItem: React.FC<Props> = (props) => {
       {confirmOpen && (
         <ConfirmModal
           onChange={setConfirmOpen}
-          title="确认删除配置？"
-          confirmText="确认删除"
-          cancelText="取消"
+          title={t('profile.confirmDelete')}
+          confirmText={t('confirm')}
+          cancelText={t('cancel')}
           onConfirm={() => {
             removeProfileItem(info.id)
             mutateProfileConfig()
@@ -276,7 +278,7 @@ const ProfileItem: React.FC<Props> = (props) => {
                       await patchAppConfig({ profileDisplayDate: 'update' })
                     }}
                   >
-                    {extra.expire ? dayjs.unix(extra.expire).format('YYYY-MM-DD') : '长期有效'}
+                    {extra.expire ? dayjs.unix(extra.expire).format('YYYY-MM-DD') : t('profile.noExpire')}
                   </Button>
                 ) : (
                   <Button
@@ -303,7 +305,7 @@ const ProfileItem: React.FC<Props> = (props) => {
                   variant="bordered"
                   className={`${isCurrent ? 'text-primary-foreground border-primary-foreground' : 'border-primary text-primary'}`}
                 >
-                  远程
+                  {t('profile.remote')}
                 </Chip>
                 <small>{dayjs(info.updated).fromNow()}</small>
               </div>
@@ -317,7 +319,7 @@ const ProfileItem: React.FC<Props> = (props) => {
                   variant="bordered"
                   className={`${isCurrent ? 'text-primary-foreground border-primary-foreground' : 'border-primary text-primary'}`}
                 >
-                  本地
+                  {t('profile.local')}
                 </Chip>
               </div>
             )}

@@ -14,8 +14,10 @@ import { IoMdRefresh } from 'react-icons/io'
 import { CgLoadbarDoc } from 'react-icons/cg'
 import { MdEditDocument } from 'react-icons/md'
 import dayjs from 'dayjs'
+import { useTranslation } from 'react-i18next'
 
 const RuleProvider: React.FC = () => {
+  const { t } = useTranslation()
   const [showDetails, setShowDetails] = useState({
     show: false,
     path: '',
@@ -77,7 +79,7 @@ const RuleProvider: React.FC = () => {
       await mihomoUpdateRuleProviders(name)
       mutate()
     } catch (e) {
-      new Notification(`${name} 更新失败\n${e}`)
+      new Notification(`${name} ${t('update.failed')}\n${e}`)
     } finally {
       setUpdating((prev) => {
         prev[index] = false
@@ -111,7 +113,7 @@ const RuleProvider: React.FC = () => {
           }
         />
       )}
-      <SettingItem title="规则集合" divider>
+      <SettingItem title={t('resources.ruleProvider')} divider>
         <Button
           size="sm"
           color="primary"
@@ -121,7 +123,7 @@ const RuleProvider: React.FC = () => {
             })
           }}
         >
-          更新全部
+          {t('resources.updateAll')}
         </Button>
       </SettingItem>
       {providers.map((provider, index) => (
@@ -137,28 +139,39 @@ const RuleProvider: React.FC = () => {
             <div className="flex h-[32px] leading-[32px] text-foreground-500">
               <div>{dayjs(provider.updatedAt).fromNow()}</div>
               {provider.format !== 'MrsRule' && provider.vehicleType !== 'Inline' && (
-                <Button
-                  isIconOnly
-                  title={provider.vehicleType == 'File' ? '编辑' : '查看'}
-                  className="ml-2"
-                  size="sm"
-                  onPress={() => {
-                    setShowDetails({
-                      show: false,
-                      privderType: 'rule-providers',
-                      path: provider.name,
-                      type: provider.vehicleType,
-                      title: provider.name,
-                      format: provider.format
-                    })
-                  }}
-                >
-                  {provider.vehicleType == 'File' ? (
-                    <MdEditDocument className={`text-lg`} />
-                  ) : (
-                    <CgLoadbarDoc className={`text-lg`} />
-                  )}
-                </Button>
+              <Button
+                isIconOnly
+                title={provider.vehicleType == 'File' ? t('edit') : t('resources.view')}
+                className="ml-2"
+                size="sm"
+                onPress={() => {
+                  setShowDetails({
+                    show: false,
+                    privderType: 'rule-providers',
+                    path: provider.name,
+                    type: provider.vehicleType,
+                    title: provider.name,
+                    format: provider.format
+                  })
+                }}
+              >
+                {provider.vehicleType == 'File' ? (
+                  <MdEditDocument className={`text-lg`} />
+                ) : (
+                  <CgLoadbarDoc className={`text-lg`} />
+                )}
+              </Button>
+              <Button
+                isIconOnly
+                title={t('update')}
+                className="ml-2"
+                size="sm"
+                onPress={() => {
+                  onUpdate(provider.name, index)
+                }}
+              >
+                <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
+              </Button>
               )}
               <Button
                 isIconOnly

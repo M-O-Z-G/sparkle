@@ -4,6 +4,7 @@ import yaml from 'js-yaml'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { BaseEditor } from '../base/base-editor-lazy'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   bypass: string[]
@@ -16,6 +17,7 @@ interface ParsedYaml {
 }
 
 const ByPassEditorModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { bypass, onCancel, onConfirm } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [currData, setCurrData] = useState<string>('')
@@ -28,10 +30,10 @@ const ByPassEditorModal: React.FC<Props> = (props) => {
       if (parsed && Array.isArray(parsed.bypass)) {
         onConfirm(parsed.bypass)
       } else {
-        alert('YAML 格式错误')
+        alert(t('bypassEditor.formatError'))
       }
     } catch (e) {
-      alert('YAML 解析失败：' + e)
+      alert(t('bypassEditor.parseFailed', { error: e }))
     }
   }
 
@@ -48,26 +50,26 @@ const ByPassEditorModal: React.FC<Props> = (props) => {
       isOpen={true}
       onOpenChange={onCancel}
       scrollBehavior="inside"
-    >
-      <ModalContent className="h-full w-[calc(100%-100px)]">
-        <ModalHeader className="flex pb-0 app-drag">编辑绕过列表 (YAML)</ModalHeader>
-        <ModalBody className="h-full">
-          <BaseEditor
-            language="yaml"
-            value={currData}
-            onChange={(value) => setCurrData(value || '')}
-          />
-        </ModalBody>
-        <ModalFooter className="pt-0">
-          <Button size="sm" variant="light" onPress={onCancel}>
-            取消
-          </Button>
-          <Button size="sm" color="primary" onPress={handleConfirm}>
-            确认
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+      >
+        <ModalContent className="h-full w-[calc(100%-100px)]">
+          <ModalHeader className="flex pb-0 app-drag">{t('bypassEditor.title')}</ModalHeader>
+          <ModalBody className="h-full">
+            <BaseEditor
+              language="yaml"
+              value={currData}
+              onChange={(value) => setCurrData(value || '')}
+            />
+          </ModalBody>
+          <ModalFooter className="pt-0">
+            <Button size="sm" variant="light" onPress={onCancel}>
+              {t('cancel')}
+            </Button>
+            <Button size="sm" color="primary" onPress={handleConfirm}>
+              {t('confirm')}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
   )
 }
 

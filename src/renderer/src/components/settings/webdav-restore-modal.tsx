@@ -3,11 +3,13 @@ import { useAppConfig } from '@renderer/hooks/use-app-config'
 import { relaunchApp, webdavDelete, webdavRestore } from '@renderer/utils/ipc'
 import React, { useState } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
+import { useTranslation } from 'react-i18next'
 interface Props {
   filenames: string[]
   onClose: () => void
 }
 const WebdavRestoreModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { filenames: names, onClose } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [filenames, setFilenames] = useState<string[]>(names)
@@ -24,10 +26,10 @@ const WebdavRestoreModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent>
-        <ModalHeader className="flex app-drag">恢复备份</ModalHeader>
+        <ModalHeader className="flex app-drag">{t('modal.webdavRestore.title')}</ModalHeader>
         <ModalBody>
           {filenames.length === 0 ? (
-            <div className="flex justify-center">还没有备份</div>
+            <div className="flex justify-center">{t('webdav.restoreSuccess')}</div>
           ) : (
             filenames.map((filename) => (
               <div className="flex" key={filename}>
@@ -42,7 +44,7 @@ const WebdavRestoreModal: React.FC<Props> = (props) => {
                       await webdavRestore(filename)
                       await relaunchApp()
                     } catch (e) {
-                      alert(`恢复失败：${e}`)
+                      alert(`${t('webdav.restoreFailed')}: ${e}`)
                     } finally {
                       setRestoring(false)
                     }
@@ -60,7 +62,7 @@ const WebdavRestoreModal: React.FC<Props> = (props) => {
                       await webdavDelete(filename)
                       setFilenames(filenames.filter((name) => name !== filename))
                     } catch (e) {
-                      alert(`删除失败：${e}`)
+                      alert(`${t('error.unknown')}: ${e}`)
                     }
                   }}
                 >
@@ -72,7 +74,7 @@ const WebdavRestoreModal: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button size="sm" variant="light" onPress={onClose}>
-            关闭
+            {t('close')}
           </Button>
         </ModalFooter>
       </ModalContent>

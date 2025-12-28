@@ -13,6 +13,7 @@ import { getProfileStr, setProfileStr } from '@renderer/utils/ipc'
 import { useNavigate } from 'react-router-dom'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import ConfirmModal from '../base/base-confirm'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   id: string
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const EditFileModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { id, isRemote, onClose } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [currData, setCurrData] = useState('')
@@ -66,21 +68,21 @@ const EditFileModal: React.FC<Props> = (props) => {
     >
       {isConfirmOpen && (
         <ConfirmModal
-          title="确认取消"
-          description="您有未保存的修改，确定要取消吗？"
-          confirmText="放弃修改"
-          cancelText="继续编辑"
+          title={t('profile.confirmCancel')}
+          description={t('profile.unsavedChanges')}
+          confirmText={t('profile.discardChanges')}
+          cancelText={t('profile.continueEdit')}
           onChange={setIsConfirmOpen}
           onConfirm={onClose}
         />
       )}
       <ModalContent className="h-full w-[calc(100%-100px)]">
-        <ModalHeader className="flex pb-0 app-drag">
+       <ModalHeader className="flex pb-0 app-drag">
           <div className="flex justify-start">
-            <div className="flex items-center">编辑订阅</div>
+            <div className="flex items-center">{t('profile.edit')}</div>
             {isRemote && (
               <small className="ml-2 text-foreground-500">
-                注意：此处编辑配置更新订阅后会还原，如需要自定义配置请使用
+                {t('profile.editWarning')}{' '}
                 <Button
                   size="sm"
                   color="primary"
@@ -90,9 +92,9 @@ const EditFileModal: React.FC<Props> = (props) => {
                     navigate('/override')
                   }}
                 >
-                  覆写
+                  {t('override.title')}
                 </Button>
-                功能
+                {t('profile.editWarningSuffix')}
               </small>
             )}
           </div>
@@ -106,18 +108,18 @@ const EditFileModal: React.FC<Props> = (props) => {
             diffRenderSideBySide={sideBySide}
           />
         </ModalBody>
-        <ModalFooter className="pt-0 flex justify-between">
+         <ModalFooter className="pt-0 flex justify-between">
           <div className="flex items-center space-x-2">
             <Switch size="sm" isSelected={isDiff} onValueChange={setIsDiff}>
-              显示修改
+              {t('profile.showChanges')}
             </Switch>
             <Switch size="sm" isSelected={sideBySide} onValueChange={setSideBySide}>
-              侧边显示
+              {t('profile.sideBySide')}
             </Switch>
           </div>
           <div className="flex gap-2">
             <Button size="sm" variant="light" onPress={handleClose}>
-              取消
+              {t('cancel')}
             </Button>
             <Button
               size="sm"
@@ -127,7 +129,7 @@ const EditFileModal: React.FC<Props> = (props) => {
                 onClose()
               }}
             >
-              保存
+              {t('save')}
             </Button>
           </div>
         </ModalFooter>

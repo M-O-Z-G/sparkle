@@ -16,12 +16,14 @@ import React, { useState, useEffect } from 'react'
 import SettingItem from '../base/base-setting-item'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import debounce from '@renderer/utils/debounce'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   onClose: () => void
 }
 
 const ProxySettingModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { onClose } = props
   const { appConfig, patchAppConfig } = useAppConfig()
 
@@ -57,9 +59,9 @@ const ProxySettingModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent className="flag-emoji">
-        <ModalHeader className="flex pb-0">代理组设置</ModalHeader>
+        <ModalHeader className="flex pb-0">{t('proxies.settings')}</ModalHeader>
         <ModalBody className="py-2 gap-1">
-          <SettingItem title="代理节点展示列数" divider>
+          <SettingItem title={t('proxies.cols')} divider>
             <Select
               classNames={{ trigger: 'data-[hover=true]:bg-default-200' }}
               className="w-[150px]"
@@ -70,14 +72,14 @@ const ProxySettingModal: React.FC<Props> = (props) => {
                 await patchAppConfig({ proxyCols: v.currentKey as 'auto' | '1' | '2' | '3' | '4' })
               }}
             >
-              <SelectItem key="auto">自动</SelectItem>
-              <SelectItem key="1">一列</SelectItem>
-              <SelectItem key="2">两列</SelectItem>
-              <SelectItem key="3">三列</SelectItem>
-              <SelectItem key="4">四列</SelectItem>
+              <SelectItem key="auto">{t('proxies.cols.auto')}</SelectItem>
+              <SelectItem key="1">1</SelectItem>
+              <SelectItem key="2">2</SelectItem>
+              <SelectItem key="3">3</SelectItem>
+              <SelectItem key="4">4</SelectItem>
             </Select>
           </SettingItem>
-          <SettingItem title="节点排序方式" divider>
+          <SettingItem title={t('proxies.sort')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -88,12 +90,12 @@ const ProxySettingModal: React.FC<Props> = (props) => {
                 })
               }}
             >
-              <Tab key="default" title="默认" />
-              <Tab key="delay" title="延迟" />
-              <Tab key="name" title="名称" />
+              <Tab key="default" title={t('proxies.sort.default')} />
+              <Tab key="delay" title={t('proxies.sort.delay')} />
+              <Tab key="name" title={t('proxies.sort.name')} />
             </Tabs>
           </SettingItem>
-          <SettingItem title="代理组详细信息" divider>
+          <SettingItem title={t('proxies.layout')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -104,12 +106,12 @@ const ProxySettingModal: React.FC<Props> = (props) => {
                 })
               }}
             >
-              <Tab key="hidden" title="隐藏" />
-              <Tab key="single" title="单行" />
-              <Tab key="double" title="双行" />
+              <Tab key="hidden" title={t('proxies.layout.hidden')} />
+              <Tab key="single" title={t('proxies.layout.single')} />
+              <Tab key="double" title={t('proxies.layout.double')} />
             </Tabs>
           </SettingItem>
-          <SettingItem title="代理节点详细信息" divider>
+          <SettingItem title={t('proxies.layout')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -120,12 +122,12 @@ const ProxySettingModal: React.FC<Props> = (props) => {
                 })
               }}
             >
-              <Tab key="hidden" title="隐藏" />
-              <Tab key="single" title="单行" />
-              <Tab key="double" title="双行" />
+              <Tab key="hidden" title={t('proxies.layout.hidden')} />
+              <Tab key="single" title={t('proxies.layout.single')} />
+              <Tab key="double" title={t('proxies.layout.double')} />
             </Tabs>
           </SettingItem>
-          <SettingItem title="切换节点时断开连接" divider>
+          <SettingItem title={t('advanced.autoCloseConnection')} divider>
             <Switch
               size="sm"
               isSelected={autoCloseConnection}
@@ -134,7 +136,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               }}
             />
           </SettingItem>
-          <SettingItem title="延迟测试地址" divider>
+          <SettingItem title={t('advanced.delayTestUrl')} divider>
             <Input
               size="sm"
               className="w-[60%]"
@@ -146,7 +148,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               }}
             />
           </SettingItem>
-          <SettingItem title="延迟测试并发数量" divider>
+          <SettingItem title={t('advanced.delayTestConcurrency')} divider>
             <Input
               type="number"
               size="sm"
@@ -158,7 +160,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               }}
             />
           </SettingItem>
-          <SettingItem title="延迟测试超时时间">
+          <SettingItem title={t('advanced.delayTestTimeout')}>
             <Input
               type="number"
               size="sm"
@@ -173,7 +175,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button size="sm" variant="light" onPress={onClose}>
-            关闭
+            {t('close')}
           </Button>
         </ModalFooter>
       </ModalContent>

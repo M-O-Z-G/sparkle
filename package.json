@@ -3,7 +3,7 @@
   "version": "1.6.16",
   "description": "Sparkle",
   "main": "./out/main/index.js",
-  "author": "M-O-Z-G",
+  "author": "Aleksandr \"M.O.Z.G\" Dikov",
   "homepage": "https://github.com/M-O-Z-G/sparkle",
   "scripts": {
     "format": "prettier --write .",
