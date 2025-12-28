@@ -370,5 +370,10 @@
   "appearance.showTrafficStatusbar": "Show traffic in status bar",
   "appearance.fetchTheme": "Fetch Themes",
   "appearance.importTheme": "Import Theme",
-  "appearance.editTheme": "Edit Theme"
+  "appearance.editTheme": "Edit Theme",
+  "error.autoUpdateNotSupported": "Auto-update not supported, please download manually",
+  "error.fileNotFoundInRelease": "Unable to find SHA-256 information for \"{{file}}\" in GitHub Release",
+  "error.checksumFailed": "SHA-256 verification failed: local hash {{local}} does not match expected {{expected}}",
+  "error.downloadCancelled": "Download cancelled",
+  "error.downloadFailed": "Download failed"
 }

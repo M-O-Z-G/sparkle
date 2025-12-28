@@ -370,5 +370,10 @@
   "appearance.showTrafficStatusbar": "Показывать трафик в строке состояния",
   "appearance.fetchTheme": "Загрузить темы",
   "appearance.importTheme": "Импортировать тему",
-  "appearance.editTheme": "Редактировать тему"
+  "appearance.editTheme": "Редактировать тему",
+  "error.autoUpdateNotSupported": "Автообновление не поддерживается, пожалуйста, загрузите вручную",
+  "error.fileNotFoundInRelease": "Не удалось найти информацию SHA-256 для \"{{file}}\" в релизе GitHub",
+  "error.checksumFailed": "Проверка SHA-256 не удалась: локальный хэш {{local}} не соответствует ожидаемому {{expected}}",
+  "error.downloadCancelled": "Загрузка отменена",
+  "error.downloadFailed": "Загрузка не удалась"
 }

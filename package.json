@@ -3,8 +3,8 @@
   "version": "1.6.16",
   "description": "Sparkle",
   "main": "./out/main/index.js",
-  "author": "xishang0128",
-  "homepage": "https://github.com/xishang0128/sparkle",
+  "author": "M-O-Z-G",
+  "homepage": "https://github.com/M-O-Z-G/sparkle",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

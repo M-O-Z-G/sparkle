@@ -370,5 +370,10 @@
   "appearance.showTrafficStatusbar": "状态栏显示网速信息",
   "appearance.fetchTheme": "拉取主题",
   "appearance.importTheme": "导入主题",
-  "appearance.editTheme": "编辑主题"
+  "appearance.editTheme": "编辑主题",
+  "error.autoUpdateNotSupported": "不支持自动更新，请手动下载更新",
+  "error.fileNotFoundInRelease": "无法从 GitHub Release 中找到 \"{{file}}\" 对应的 SHA-256 信息",
+  "error.checksumFailed": "SHA-256 校验失败：本地哈希 {{local}} 与预期 {{expected}} 不符",
+  "error.downloadCancelled": "下载已取消",
+  "error.downloadFailed": "下载失败"
 }

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios'
-// import { parseYaml } from '../utils/yaml'
+import { parseYaml } from '../utils/yaml'
 import { app, shell } from 'electron'
-import { /* getAppConfig, */ getControledMihomoConfig } from '../config'
+import { getAppConfig, getControledMihomoConfig } from '../config'
 import { dataDir, exeDir, exePath, isPortable, resourcesFilesDir } from '../utils/dirs'
 import { copyFile, rm, writeFile, readFile } from 'fs/promises'
 import path from 'path'
@@ -15,17 +15,12 @@ import { disableSysProxy } from '../sys/sysproxy'
 let downloadCancelToken: CancelTokenSource | null = null
 
 export async function checkUpdate(): Promise<AppVersion | undefined> {
-  // Auto-update disabled for multilingual fork
-  // If you want to enable updates, point to your fork's releases
-  // Original repo: https://github.com/xishang0128/sparkle
-  return undefined
-
-  /* 
+  // Multilingual fork - updates from M-O-Z-G/sparkle
   const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
   const { updateChannel = 'stable' } = await getAppConfig()
-  let url = 'https://github.com/xishang0128/sparkle/releases/latest/download/latest.yml'
+  let url = 'https://github.com/M-O-Z-G/sparkle/releases/latest/download/latest.yml'
   if (updateChannel == 'beta') {
-    url = 'https://github.com/xishang0128/sparkle/releases/download/pre-release/latest.yml'
+    url = 'https://github.com/M-O-Z-G/sparkle/releases/download/pre-release/latest.yml'
   }
   const res = await axios.get(url, {
     headers: { 'Content-Type': 'application/octet-stream' },
@@ -45,7 +40,6 @@ export async function checkUpdate(): Promise<AppVersion | undefined> {
   } else {
     return undefined
   }
-  */
 }
 
 export async function downloadAndInstallUpdate(version: string): Promise<void> {
@@ -54,7 +48,7 @@ export async function downloadAndInstallUpdate(version: string): Promise<void> {
   if (version.includes('beta')) {
     releaseTag = 'pre-release'
   }
-  const baseUrl = `https://github.com/xishang0128/sparkle/releases/download/${releaseTag}/`
+  const baseUrl = `https://github.com/M-O-Z-G/sparkle/releases/download/${releaseTag}/`
   const fileMap = {
     'win32-x64': `sparkle-windows-${version}-x64-setup.exe`,
     'win32-arm64': `sparkle-windows-${version}-arm64-setup.exe`,
@@ -70,7 +64,7 @@ export async function downloadAndInstallUpdate(version: string): Promise<void> {
   }
   downloadCancelToken = axios.CancelToken.source()
 
-  const apiUrl = `https://api.github.com/repos/xishang0128/sparkle/releases/tags/${releaseTag}`
+  const apiUrl = `https://api.github.com/repos/M-O-Z-G/sparkle/releases/tags/${releaseTag}`
   const apiRequestConfig: AxiosRequestConfig = {
     headers: { Accept: 'application/vnd.github.v3+json' },
     ...(mixedPort != 0 && {

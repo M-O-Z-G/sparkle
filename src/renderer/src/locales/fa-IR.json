@@ -370,5 +370,10 @@
   "appearance.showTrafficStatusbar": "نمایش ترافیک در نوار وضعیت",
   "appearance.fetchTheme": "دریافت تم‌ها",
   "appearance.importTheme": "وارد کردن تم",
-  "appearance.editTheme": "ویرایش تم"
+  "appearance.editTheme": "ویرایش تم",
+  "error.autoUpdateNotSupported": "بروزرسانی خودکار پشتیبانی نمی‌شود، لطفاً به صورت دستی دانلود کنید",
+  "error.fileNotFoundInRelease": "اطلاعات SHA-256 برای \"{{file}}\" در انتشار GitHub یافت نشد",
+  "error.checksumFailed": "تایید SHA-256 ناموفق بود: هش محلی {{local}} با مورد انتظار {{expected}} مطابقت ندارد",
+  "error.downloadCancelled": "دانلود لغو شد",
+  "error.downloadFailed": "دانلود ناموفق بود"
 }
