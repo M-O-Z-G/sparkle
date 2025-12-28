@@ -1,15 +1,22 @@
-# Sparkle
+# Sparkle (Multilingual Fork)
 
-<h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI</h3>
+<h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI with Multi-language Support</h3>
 
-<p align="center">
-  <a href="https://github.com/xishang0128/sparkle/releases">
-    <img src="https://img.shields.io/github/release/xishang0128/sparkle/all.svg">
-  </a>
-  <a href="https://t.me/+y7rcYjEKIiI1NzZl">
-    <img src="https://img.shields.io/badge/Telegram-Group-blue?logo=telegram">
-  </a>
-</p>
+> **⚠️ Important Notice**  
+> This is a multilingual fork of the [original Sparkle](https://github.com/xishang0128/sparkle) project. This fork **ONLY adds multi-language support** (English, Russian, Persian/Farsi, and Simplified Chinese).
+>
+> **If you encounter issues that are NOT related to language/translation:**
+>
+> - Please check if the issue exists in the [original Sparkle repository](https://github.com/xishang0128/sparkle)
+> - If yes, please report the issue to the original repository
+> - We only handle language-related issues and translations in this fork
+>
+> **Supported Languages:**
+>
+> - 🇺🇸 English (default)
+> - 🇨🇳 简体中文 (Simplified Chinese)
+> - 🇷🇺 Русский (Russian)
+> - 🇮🇷 فارسی (Persian/Farsi)
 
 ## Features
 
@@ -20,10 +27,11 @@
 - [x] One-click backup and restore configuration via WebDAV
 - [x] Powerful override function, arbitrary modification of configuration files
 - [x] Deep integration with Sub-Store for easy subscription management
+- [x] **Multi-language interface** (English, Chinese, Russian, Persian)
 
 ## Development
 
-This project is for personal use, most PRs may not be merged, you can fork and modify it yourself.
+This project is a fork for multilingual support. For general features and improvements, please refer to the [original Sparkle repository](https://github.com/xishang0128/sparkle).
 
 ### Environment Requirements
 
@@ -42,6 +50,7 @@ Sparkle is built on Electron + React + TypeScript
 - **HeroUI (NextUI)** - UI component library
 - **Tailwind CSS** - Atomic CSS framework
 - **Monaco Editor** - Code editor
+- **react-i18next** - Internationalization framework
 
 #### Backend Technology Stack
 
@@ -54,7 +63,7 @@ Sparkle is built on Electron + React + TypeScript
 1. **Clone the project**
 
 ```bash
-git clone https://github.com/xishang0128/sparkle.git
+git clone https://github.com/YOUR_FORK_URL/sparkle.git
 cd sparkle
 ```
 
@@ -100,6 +109,7 @@ sparkle/
 │   │   │   ├── components/ # React components
 │   │   │   ├── pages/      # Page components
 │   │   │   ├── hooks/      # Custom hooks
+│   │   │   ├── locales/    # Translation files (i18n)
 │   │   │   ├── routes/     # Route configuration
 │   │   │   └── utils/      # Frontend utilities
 │   │   └── index.html      # Renderer process entry HTML
@@ -218,32 +228,56 @@ node --version
 - Make sure Node.js version >= 20.0.0
 - Use pnpm for dependency management
 
-### Contribution Guide
+### Contributing Translations
+
+We welcome contributions to improve or add new translations! Translation files are located in `src/renderer/src/locales/`:
+
+- `en-US.json` - English
+- `zh-CN.json` - Simplified Chinese
+- `ru-RU.json` - Russian
+- `fa-IR.json` - Persian/Farsi
+
+To add a new language or improve existing translations:
 
 1. Fork this repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
+2. Add or edit the appropriate JSON file in `src/renderer/src/locales/`
+3. Update `src/renderer/src/locales/i18n.ts` to include the new language
+4. Test your changes
+5. Submit a Pull Request
+
+### Contribution Guide
+
+**For language/translation issues:**
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/improve-translations`)
+3. Commit changes (`git commit -m 'Improve Russian translations'`)
+4. Push to branch (`git push origin feature/improve-translations`)
 5. Create a Pull Request
+
+**For non-language issues:**
+
+- Please check the [original Sparkle repository](https://github.com/xishang0128/sparkle) first
+- If the issue exists there, please report it to the original repository
 
 ### Development Notes
 
 - Make sure code passes ESLint checks
 - Run `pnpm format` to format code before committing
 - Follow existing code style and naming conventions
-- Update relevant documentation when adding new features
+- For translation changes, update all language files to maintain consistency
 - Main process code modifications require restarting the development server
 - Renderer process code supports hot reloading
 - All commands use pnpm
 - After modifying type definitions, TypeScript service needs to be restarted
 - Preload script modifications require restarting the application
 
-## Star History
+## Credits
 
-<a href="https://www.star-history.com/#xishang0128/sparkle&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date" />
- </picture>
-</a>
+- Original Sparkle by [xishang0128](https://github.com/xishang0128/sparkle)
+- Based on [Clash Party](https://github.com/mihomo-party-org/clash-party) i18n implementation
+- [Mihomo](https://github.com/MetaCubeX/mihomo) core
+
+## License
+
+Same as the original Sparkle project.

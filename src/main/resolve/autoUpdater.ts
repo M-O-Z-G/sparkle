@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios'
-import { parseYaml } from '../utils/yaml'
+// import { parseYaml } from '../utils/yaml'
 import { app, shell } from 'electron'
-import { getAppConfig, getControledMihomoConfig } from '../config'
+import { /* getAppConfig, */ getControledMihomoConfig } from '../config'
 import { dataDir, exeDir, exePath, isPortable, resourcesFilesDir } from '../utils/dirs'
 import { copyFile, rm, writeFile, readFile } from 'fs/promises'
 import path from 'path'
@@ -15,6 +15,12 @@ import { disableSysProxy } from '../sys/sysproxy'
 let downloadCancelToken: CancelTokenSource | null = null
 
 export async function checkUpdate(): Promise<AppVersion | undefined> {
+  // Auto-update disabled for multilingual fork
+  // If you want to enable updates, point to your fork's releases
+  // Original repo: https://github.com/xishang0128/sparkle
+  return undefined
+
+  /* 
   const { 'mixed-port': mixedPort = 7890 } = await getControledMihomoConfig()
   const { updateChannel = 'stable' } = await getAppConfig()
   let url = 'https://github.com/xishang0128/sparkle/releases/latest/download/latest.yml'
@@ -39,6 +45,7 @@ export async function checkUpdate(): Promise<AppVersion | undefined> {
   } else {
     return undefined
   }
+  */
 }
 
 export async function downloadAndInstallUpdate(version: string): Promise<void> {

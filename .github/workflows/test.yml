@@ -77,7 +77,7 @@ jobs:
           GIT_COMMIT_HASH=$(git rev-parse --short HEAD)
           VERSION=$(jq -r '.version' package.json)
           PR_NUMBER=${{ github.event.pull_request.number }}
-          
+
           TEST_VERSION="${VERSION}-test-pr${PR_NUMBER}-${GIT_COMMIT_HASH}"
           jq --arg version "$TEST_VERSION" '.version = $version' package.json > tmp.json && mv tmp.json package.json
 
