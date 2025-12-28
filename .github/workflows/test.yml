@@ -1,6 +1,7 @@
 name: Test Build
 permissions: read-all
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - master
