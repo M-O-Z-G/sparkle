@@ -361,5 +361,14 @@
   "card.rule": "Правило",
   "card.resource": "Ресурсы",
   "card.override": "Переопределение",
-  "card.substore": "Sub-Store"
+  "card.substore": "Sub-Store",
+  "appearance.title": "Настройки внешнего вида",
+  "appearance.showFloatingWindow": "Показывать плавающее окно",
+  "appearance.showFloatingWindow.help": "Плавающее окно может вызвать сбой приложения, если не отключено ускорение GPU",
+  "appearance.spinFloatingIcon": "Вращать иконку плавающего окна в зависимости от скорости",
+  "appearance.showTrafficTaskbar": "Показывать трафик в панели задач",
+  "appearance.showTrafficStatusbar": "Показывать трафик в строке состояния",
+  "appearance.fetchTheme": "Загрузить темы",
+  "appearance.importTheme": "Импортировать тему",
+  "appearance.editTheme": "Редактировать тему"
 }

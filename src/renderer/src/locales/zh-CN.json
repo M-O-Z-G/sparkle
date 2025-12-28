@@ -361,5 +361,14 @@
   "card.rule": "规则",
   "card.resource": "资源",
   "card.override": "覆写",
-  "card.substore": "Sub-Store"
+  "card.substore": "Sub-Store",
+  "appearance.title": "外观设置",
+  "appearance.showFloatingWindow": "显示悬浮窗",
+  "appearance.showFloatingWindow.help": "未禁用GPU加速的情况下，悬浮窗可能会导致应用崩溃",
+  "appearance.spinFloatingIcon": "根据网速旋转悬浮窗图标",
+  "appearance.showTrafficTaskbar": "任务栏显示网速信息",
+  "appearance.showTrafficStatusbar": "状态栏显示网速信息",
+  "appearance.fetchTheme": "拉取主题",
+  "appearance.importTheme": "导入主题",
+  "appearance.editTheme": "编辑主题"
 }

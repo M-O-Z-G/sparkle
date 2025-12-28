@@ -361,5 +361,14 @@
   "card.rule": "قانون",
   "card.resource": "منابع",
   "card.override": "بازنویسی",
-  "card.substore": "Sub-Store"
+  "card.substore": "Sub-Store",
+  "appearance.title": "تنظیمات ظاهر",
+  "appearance.showFloatingWindow": "نمایش پنجره شناور",
+  "appearance.showFloatingWindow.help": "پنجره شناور ممکن است باعث خرابی برنامه شود اگر شتاب GPU غیرفعال نشده باشد",
+  "appearance.spinFloatingIcon": "چرخاندن آیکون پنجره شناور بر اساس سرعت",
+  "appearance.showTrafficTaskbar": "نمایش ترافیک در نوار وظیفه",
+  "appearance.showTrafficStatusbar": "نمایش ترافیک در نوار وضعیت",
+  "appearance.fetchTheme": "دریافت تم‌ها",
+  "appearance.importTheme": "وارد کردن تم",
+  "appearance.editTheme": "ویرایش تم"
 }

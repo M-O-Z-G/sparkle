@@ -361,5 +361,14 @@
   "card.rule": "Rule",
   "card.resource": "Resources",
   "card.override": "Override",
-  "card.substore": "Sub-Store"
+  "card.substore": "Sub-Store",
+  "appearance.title": "Appearance Settings",
+  "appearance.showFloatingWindow": "Show Floating Window",
+  "appearance.showFloatingWindow.help": "The floating window may cause the app to crash if GPU acceleration is not disabled",
+  "appearance.spinFloatingIcon": "Rotate floating window icon based on speed",
+  "appearance.showTrafficTaskbar": "Show traffic in taskbar",
+  "appearance.showTrafficStatusbar": "Show traffic in status bar",
+  "appearance.fetchTheme": "Fetch Themes",
+  "appearance.importTheme": "Import Theme",
+  "appearance.editTheme": "Edit Theme"
 }
