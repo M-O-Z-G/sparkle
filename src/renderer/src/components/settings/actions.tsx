@@ -16,8 +16,10 @@ import { IoIosHelpCircle } from 'react-icons/io'
 import { startTour } from '@renderer/utils/driver'
 import { useNavigate } from 'react-router-dom'
 import ConfirmModal from '../base/base-confirm'
+import { useTranslation } from 'react-i18next'
 
 const Actions: React.FC = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [newVersion, setNewVersion] = useState('')
   const [changelog, setChangelog] = useState('')
@@ -71,25 +73,29 @@ const Actions: React.FC = () => {
       {confirmOpen && (
         <ConfirmModal
           onChange={setConfirmOpen}
-          title="确认删除配置？"
+          title={t('actions.resetApp.confirm.title')}
           description={
             <>
-              ⚠️ 删除配置，
-              <span className="text-red-500">操作不可撤销</span>
+              {t('actions.resetApp.confirm.description').replace('⚠️ ', '')}
+              <span className="text-red-500">
+                {t('actions.resetApp.confirm.description').includes('操作不可撤销')
+                  ? t('actions.resetApp.confirm.description').split('，')[1]
+                  : ''}
+              </span>
             </>
           }
-          confirmText="确认删除"
-          cancelText="取消"
+          confirmText={t('actions.resetApp')}
+          cancelText={t('cancel')}
           onConfirm={resetAppConfig}
         />
       )}
       <SettingCard>
-        <SettingItem title="打开引导页面" divider>
+        <SettingItem title={t('actions.openTour')} divider>
           <Button size="sm" onPress={() => startTour(navigate)}>
-            打开引导页面
+            {t('actions.openTour')}
           </Button>
         </SettingItem>
-        <SettingItem title="检查更新" divider>
+        <SettingItem title={t('actions.checkUpdate')} divider>
           <Button
             size="sm"
             isLoading={checkingUpdate}
@@ -102,7 +108,9 @@ const Actions: React.FC = () => {
                   setChangelog(version.changelog)
                   setOpenUpdate(true)
                 } else {
-                  new window.Notification('当前已是最新版本', { body: '无需更新' })
+                  new window.Notification(t('actions.checkUpdate.latest'), {
+                    body: t('actions.checkUpdate.noUpdate')
+                  })
                 }
               } catch (e) {
                 alert(e)
@@ -111,13 +119,13 @@ const Actions: React.FC = () => {
               }
             }}
           >
-            检查更新
+            {t('actions.checkUpdate')}
           </Button>
         </SettingItem>
         <SettingItem
-          title="重置软件"
+          title={t('actions.resetApp')}
           actions={
-            <Tooltip content="删除所有配置，将软件恢复初始状态">
+            <Tooltip content={t('actions.resetApp.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
@@ -126,13 +134,13 @@ const Actions: React.FC = () => {
           divider
         >
           <Button size="sm" onPress={() => setConfirmOpen(true)}>
-            重置软件
+            {t('actions.resetApp')}
           </Button>
         </SettingItem>
         <SettingItem
-          title="清除缓存"
+          title={t('actions.clearCache')}
           actions={
-            <Tooltip content="清除软件渲染进程缓存">
+            <Tooltip content={t('actions.clearCache.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
@@ -141,13 +149,13 @@ const Actions: React.FC = () => {
           divider
         >
           <Button size="sm" onPress={() => localStorage.clear()}>
-            清除缓存
+            {t('actions.clearCache')}
           </Button>
         </SettingItem>
         <SettingItem
-          title="创建堆快照"
+          title={t('actions.createHeapSnapshot')}
           actions={
-            <Tooltip content="创建主进程堆快照，用于排查内存问题">
+            <Tooltip content={t('actions.createHeapSnapshot.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
@@ -156,13 +164,13 @@ const Actions: React.FC = () => {
           divider
         >
           <Button size="sm" onPress={createHeapSnapshot}>
-            创建堆快照
+            {t('actions.createHeapSnapshot')}
           </Button>
         </SettingItem>
         <SettingItem
-          title="保留内核退出"
+          title={t('actions.quitWithoutCore')}
           actions={
-            <Tooltip content="完全退出软件，只保留内核进程">
+            <Tooltip content={t('actions.quitWithoutCore.help')}>
               <Button isIconOnly size="sm" variant="light">
                 <IoIosHelpCircle className="text-lg" />
               </Button>
@@ -171,15 +179,15 @@ const Actions: React.FC = () => {
           divider
         >
           <Button size="sm" onPress={quitWithoutCore}>
-            退出
+            {t('quit')}
           </Button>
         </SettingItem>
-        <SettingItem title="退出应用" divider>
+        <SettingItem title={t('actions.quitApp')} divider>
           <Button size="sm" onPress={quitApp}>
-            退出应用
+            {t('actions.quitApp')}
           </Button>
         </SettingItem>
-        <SettingItem title="应用版本">
+        <SettingItem title={t('actions.appVersion')}>
           <div>v{version}</div>
         </SettingItem>
       </SettingCard>
