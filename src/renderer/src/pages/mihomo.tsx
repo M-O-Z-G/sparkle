@@ -321,19 +321,17 @@ const Mihomo: React.FC = () => {
                 const selectedPath = v.currentKey as string
                 if (selectedPath) handleConfigChangeWithRestart('systemCorePath', selectedPath)
               }}
-              >
-               {loadingPaths ? (
-                 <SelectItem key="">{t('mihomo.searchingCore')}</SelectItem>
-               ) : systemCorePaths.length > 0 ? (
-                 systemCorePaths.map((path) => <SelectItem key={path}>{path}</SelectItem>)
-               ) : (
-                 <SelectItem key="">{t('mihomo.systemCoreNotFound')}</SelectItem>
-               )}
+            >
+              {loadingPaths ? (
+                <SelectItem key="">{t('mihomo.searchingCore')}</SelectItem>
+              ) : systemCorePaths.length > 0 ? (
+                systemCorePaths.map((path) => <SelectItem key={path}>{path}</SelectItem>)
+              ) : (
+                <SelectItem key="">{t('mihomo.systemCoreNotFound')}</SelectItem>
+              )}
             </Select>
             {!loadingPaths && systemCorePaths.length === 0 && (
-              <div className="mt-2 text-sm text-warning">
-                {t('mihomo.installCoreFirst')}
-              </div>
+              <div className="mt-2 text-sm text-warning">{t('mihomo.installCoreFirst')}</div>
             )}
           </SettingItem>
         )}
@@ -345,11 +343,17 @@ const Mihomo: React.FC = () => {
             disabledKeys={['service']}
             onSelectionChange={(key) => handlePermissionModeChange(key as string)}
           >
-            <Tab key="elevated" title={platform === 'win32' ? t('mihomo.taskSchedule') : t('mihomo.authorizedRun')} />
+            <Tab
+              key="elevated"
+              title={platform === 'win32' ? t('mihomo.taskSchedule') : t('mihomo.authorizedRun')}
+            />
             <Tab key="service" title={t('mihomo.systemService')} />
           </Tabs>
         </SettingItem>
-        <SettingItem title={platform === 'win32' ? t('mihomo.taskStatus') : t('mihomo.permissionStatus')} divider>
+        <SettingItem
+          title={platform === 'win32' ? t('mihomo.taskStatus') : t('mihomo.permissionStatus')}
+          divider
+        >
           <Button size="sm" color="primary" onPress={() => setShowPermissionModal(true)}>
             {t('common.manage')}
           </Button>

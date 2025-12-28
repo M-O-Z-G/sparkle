@@ -77,7 +77,7 @@ const EditFileModal: React.FC<Props> = (props) => {
         />
       )}
       <ModalContent className="h-full w-[calc(100%-100px)]">
-       <ModalHeader className="flex pb-0 app-drag">
+        <ModalHeader className="flex pb-0 app-drag">
           <div className="flex justify-start">
             <div className="flex items-center">{t('profile.edit')}</div>
             {isRemote && (
@@ -108,7 +108,7 @@ const EditFileModal: React.FC<Props> = (props) => {
             diffRenderSideBySide={sideBySide}
           />
         </ModalBody>
-         <ModalFooter className="pt-0 flex justify-between">
+        <ModalFooter className="pt-0 flex justify-between">
           <div className="flex items-center space-x-2">
             <Switch size="sm" isSelected={isDiff} onValueChange={setIsDiff}>
               {t('profile.showChanges')}

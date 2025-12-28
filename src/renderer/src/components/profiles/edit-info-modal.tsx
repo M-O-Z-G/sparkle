@@ -75,7 +75,9 @@ const EditInfoModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent>
-        <ModalHeader className="flex app-drag">{item.id ? t('edit') : t('profile.import')}</ModalHeader>
+        <ModalHeader className="flex app-drag">
+          {item.id ? t('edit') : t('profile.import')}
+        </ModalHeader>
         <ModalBody>
           <SettingItem title={t('name')}>
             <Input
@@ -179,11 +181,11 @@ const EditInfoModal: React.FC<Props> = (props) => {
                 .filter((i) => i.global)
                 .map((i) => {
                   return (
-                     <div className="flex mb-2" key={i.id}>
-                       <Button disabled fullWidth variant="flat" size="sm">
-                         {i.name} ({t('override.global')})
-                       </Button>
-                     </div>
+                    <div className="flex mb-2" key={i.id}>
+                      <Button disabled fullWidth variant="flat" size="sm">
+                        {i.name} ({t('override.global')})
+                      </Button>
+                    </div>
                   )
                 })}
               {values.override?.map((i) => {
@@ -217,9 +219,9 @@ const EditInfoModal: React.FC<Props> = (props) => {
                     <FaPlus />
                   </Button>
                 </DropdownTrigger>
-                 <DropdownMenu
-                   emptyContent={t('override.noAvailable')}
-                   onAction={(key) => {
+                <DropdownMenu
+                  emptyContent={t('override.noAvailable')}
+                  onAction={(key) => {
                     setValues({
                       ...values,
                       override: Array.from(values.override || []).concat(key.toString())

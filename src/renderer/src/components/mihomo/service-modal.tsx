@@ -158,7 +158,9 @@ const ServiceModal: React.FC<Props> = (props) => {
               <CardBody className="py-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{t('mihomo.serviceModal.serviceStatus')}</span>
+                    <span className="text-sm font-medium">
+                      {t('mihomo.serviceModal.serviceStatus')}
+                    </span>
                   </div>
                   {status === null ? (
                     <Chip
@@ -192,7 +194,9 @@ const ServiceModal: React.FC<Props> = (props) => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{t('mihomo.serviceModal.connectionStatus')}</span>
+                    <span className="text-sm font-medium">
+                      {t('mihomo.serviceModal.connectionStatus')}
+                    </span>
                   </div>
                   {connectionStatus === 'checking' ? (
                     <Chip

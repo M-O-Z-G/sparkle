@@ -3,13 +3,19 @@
 <h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI with Multi-language Support</h3>
 
 > **⚠️ Important Notice**  
-> This is a multilingual fork of the [original Sparkle](https://github.com/xishang0128/sparkle) project. This fork **ONLY adds multi-language support** (English, Russian, Persian/Farsi, and Simplified Chinese).
+> This is a multilingual fork of the [original Sparkle](https://github.com/xishang0128/sparkle) project. This fork **adds comprehensive multi-language support** (English, Russian, Persian/Farsi, and Simplified Chinese).
 >
-> **If you encounter issues that are NOT related to language/translation:**
+> **Update (January 2025):** The original Sparkle repository has been archived by its author. We respect the original developer's decision and will continue maintaining this multilingual fork independently. This project maintains the same high-quality codebase while focusing on internationalization and accessibility for global users.
 >
-> - Please check if the issue exists in the [original Sparkle repository](https://github.com/xishang0128/sparkle)
-> - If yes, please report the issue to the original repository
-> - We only handle language-related issues and translations in this fork
+> **Version Numbering:** We use version format `X.Y.Zm#` where:
+>
+> - `X.Y.Z` matches the base Sparkle version
+> - `m#` indicates our multilingual fork release number (e.g., `1.6.16m1`)
+>
+> **If you encounter issues:**
+>
+> - For **translation/language issues**: Please report them here in this repository
+> - For **core functionality issues**: We will investigate and fix them in this fork as the original repository is now archived
 >
 > **Supported Languages:**
 >
@@ -31,7 +37,7 @@
 
 ## Development
 
-This project is a fork for multilingual support. For general features and improvements, please refer to the [original Sparkle repository](https://github.com/xishang0128/sparkle).
+This project is a community-maintained multilingual fork. We welcome contributions for translations, bug fixes, and feature improvements. Since the original Sparkle repository has been archived, we are now the primary active development repository for this application with international language support.
 
 ### Environment Requirements
 
@@ -247,18 +253,27 @@ To add a new language or improve existing translations:
 
 ### Contribution Guide
 
-**For language/translation issues:**
+We welcome all types of contributions to this project:
+
+**For translations:**
 
 1. Fork this repository
 2. Create a feature branch (`git checkout -b feature/improve-translations`)
-3. Commit changes (`git commit -m 'Improve Russian translations'`)
-4. Push to branch (`git push origin feature/improve-translations`)
-5. Create a Pull Request
+3. Edit translation files in `src/renderer/src/locales/`
+4. Commit changes (`git commit -m 'Improve Russian translations'`)
+5. Push to branch (`git push origin feature/improve-translations`)
+6. Create a Pull Request
 
-**For non-language issues:**
+**For bug fixes and features:**
 
-- Please check the [original Sparkle repository](https://github.com/xishang0128/sparkle) first
-- If the issue exists there, please report it to the original repository
+1. Fork this repository
+2. Create a feature branch (`git checkout -b fix/issue-description`)
+3. Make your changes
+4. Test thoroughly
+5. Commit changes with descriptive messages
+6. Push to branch and create a Pull Request
+
+Since the original Sparkle repository is now archived, we handle all types of issues and improvements in this fork.
 
 ### Development Notes
 

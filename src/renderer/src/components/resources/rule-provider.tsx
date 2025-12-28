@@ -139,51 +139,42 @@ const RuleProvider: React.FC = () => {
             <div className="flex h-[32px] leading-[32px] text-foreground-500">
               <div>{dayjs(provider.updatedAt).fromNow()}</div>
               {provider.format !== 'MrsRule' && provider.vehicleType !== 'Inline' && (
-              <Button
-                isIconOnly
-                title={provider.vehicleType == 'File' ? t('edit') : t('resources.view')}
-                className="ml-2"
-                size="sm"
-                onPress={() => {
-                  setShowDetails({
-                    show: false,
-                    privderType: 'rule-providers',
-                    path: provider.name,
-                    type: provider.vehicleType,
-                    title: provider.name,
-                    format: provider.format
-                  })
-                }}
-              >
-                {provider.vehicleType == 'File' ? (
-                  <MdEditDocument className={`text-lg`} />
-                ) : (
-                  <CgLoadbarDoc className={`text-lg`} />
-                )}
-              </Button>
-              <Button
-                isIconOnly
-                title={t('update')}
-                className="ml-2"
-                size="sm"
-                onPress={() => {
-                  onUpdate(provider.name, index)
-                }}
-              >
-                <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
-              </Button>
+                <>
+                  <Button
+                    isIconOnly
+                    title={provider.vehicleType == 'File' ? t('edit') : t('resources.view')}
+                    className="ml-2"
+                    size="sm"
+                    onPress={() => {
+                      setShowDetails({
+                        show: false,
+                        privderType: 'rule-providers',
+                        path: provider.name,
+                        type: provider.vehicleType,
+                        title: provider.name,
+                        format: provider.format
+                      })
+                    }}
+                  >
+                    {provider.vehicleType == 'File' ? (
+                      <MdEditDocument className={`text-lg`} />
+                    ) : (
+                      <CgLoadbarDoc className={`text-lg`} />
+                    )}
+                  </Button>
+                  <Button
+                    isIconOnly
+                    title={t('update')}
+                    className="ml-2"
+                    size="sm"
+                    onPress={() => {
+                      onUpdate(provider.name, index)
+                    }}
+                  >
+                    <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
+                  </Button>
+                </>
               )}
-              <Button
-                isIconOnly
-                title="更新"
-                className="ml-2"
-                size="sm"
-                onPress={() => {
-                  onUpdate(provider.name, index)
-                }}
-              >
-                <IoMdRefresh className={`text-lg ${updating[index] ? 'animate-spin' : ''}`} />
-              </Button>
             </div>
           </SettingItem>
           <SettingItem

@@ -267,7 +267,7 @@ const AppearanceConfig: React.FC = () => {
           {customThemes && (
             <Select
               classNames={{ trigger: 'data-[hover=true]:bg-default-200' }}
-              className="w-[60%]"
+              className="w-[40%]"
               size="sm"
               selectedKeys={new Set([customTheme])}
               disallowEmptySelection={true}

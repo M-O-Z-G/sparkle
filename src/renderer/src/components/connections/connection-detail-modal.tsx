@@ -31,6 +31,7 @@ interface CopyProps {
 }
 
 const CopyableSettingItem: React.FC<CopyProps> = (props) => {
+  const { t } = useTranslation()
   const { title, value, displayName, prefix = [] } = props
   const getSubDomains = (domain: string): string[] =>
     domain.split('.').length <= 2
@@ -101,15 +102,15 @@ const CopyableSettingItem: React.FC<CopyProps> = (props) => {
   ]
 
   return (
-      <SettingItem
-        title={title}
-        actions={
-          <Dropdown>
-            <DropdownTrigger>
-              <Button title={t('copyRule')} isIconOnly size="sm" variant="light">
-                <BiCopy className="text-lg" />
-              </Button>
-            </DropdownTrigger>
+    <SettingItem
+      title={title}
+      actions={
+        <Dropdown>
+          <DropdownTrigger>
+            <Button title={t('copyRule')} isIconOnly size="sm" variant="light">
+              <BiCopy className="text-lg" />
+            </Button>
+          </DropdownTrigger>
           <DropdownMenu
             onAction={(key) =>
               navigator.clipboard.writeText(

@@ -50,26 +50,26 @@ const ByPassEditorModal: React.FC<Props> = (props) => {
       isOpen={true}
       onOpenChange={onCancel}
       scrollBehavior="inside"
-      >
-        <ModalContent className="h-full w-[calc(100%-100px)]">
-          <ModalHeader className="flex pb-0 app-drag">{t('bypassEditor.title')}</ModalHeader>
-          <ModalBody className="h-full">
-            <BaseEditor
-              language="yaml"
-              value={currData}
-              onChange={(value) => setCurrData(value || '')}
-            />
-          </ModalBody>
-          <ModalFooter className="pt-0">
-            <Button size="sm" variant="light" onPress={onCancel}>
-              {t('cancel')}
-            </Button>
-            <Button size="sm" color="primary" onPress={handleConfirm}>
-              {t('confirm')}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+    >
+      <ModalContent className="h-full w-[calc(100%-100px)]">
+        <ModalHeader className="flex pb-0 app-drag">{t('bypassEditor.title')}</ModalHeader>
+        <ModalBody className="h-full">
+          <BaseEditor
+            language="yaml"
+            value={currData}
+            onChange={(value) => setCurrData(value || '')}
+          />
+        </ModalBody>
+        <ModalFooter className="pt-0">
+          <Button size="sm" variant="light" onPress={onCancel}>
+            {t('cancel')}
+          </Button>
+          <Button size="sm" color="primary" onPress={handleConfirm}>
+            {t('confirm')}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   )
 }
 

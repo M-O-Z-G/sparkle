@@ -72,12 +72,16 @@ const DNS: React.FC = () => {
   const [fakeIPFilterError, setFakeIPFilterError] = useState<string | null>(() => {
     if (!Array.isArray(fakeIPFilter)) return null
     const firstInvalid = fakeIPFilter.find((f) => !isValidDomainWildcard(f).ok)
-    return firstInvalid ? (isValidDomainWildcard(firstInvalid).error ?? t('error.invalidConfig')) : null
+    return firstInvalid
+      ? (isValidDomainWildcard(firstInvalid).error ?? t('error.invalidConfig'))
+      : null
   })
   const [defaultNameserverError, setDefaultNameserverError] = useState<string | null>(() => {
     if (!Array.isArray(defaultNameserver)) return null
     const firstInvalid = defaultNameserver.find((f) => !isValidDnsServer(f, true).ok)
-    return firstInvalid ? (isValidDnsServer(firstInvalid, true).error ?? t('error.invalidConfig')) : null
+    return firstInvalid
+      ? (isValidDnsServer(firstInvalid, true).error ?? t('error.invalidConfig'))
+      : null
   })
   const [nameserverError, setNameserverError] = useState<string | null>(() => {
     if (!Array.isArray(nameserver)) return null
@@ -194,11 +198,11 @@ const DNS: React.FC = () => {
                   }
                   placeholder="例：198.18.0.1/16"
                   value={values.fakeIPRange}
-                   onValueChange={(v) => {
-                     setValues({ ...values, fakeIPRange: v })
-                     const r = isValidIPv4Cidr(v)
-                     setFakeIPRangeError(r.ok ? null : (r.error ?? t('error.invalidConfig')))
-                   }}
+                  onValueChange={(v) => {
+                    setValues({ ...values, fakeIPRange: v })
+                    const r = isValidIPv4Cidr(v)
+                    setFakeIPRangeError(r.ok ? null : (r.error ?? t('error.invalidConfig')))
+                  }}
                 />
               </Tooltip>
             </SettingItem>
@@ -238,7 +242,9 @@ const DNS: React.FC = () => {
                 setValues({ ...values, fakeIPFilter: arr })
                 const firstInvalid = arr.find((f) => !isValidDomainWildcard(f).ok)
                 setFakeIPFilterError(
-                  firstInvalid ? (isValidDomainWildcard(firstInvalid).error ?? t('error.invalidConfig')) : null
+                  firstInvalid
+                    ? (isValidDomainWildcard(firstInvalid).error ?? t('error.invalidConfig'))
+                    : null
                 )
               }}
               placeholder="例：+.lan"
@@ -254,7 +260,9 @@ const DNS: React.FC = () => {
             setValues({ ...values, defaultNameserver: arr })
             const firstInvalid = arr.find((f) => !isValidDnsServer(f, true).ok)
             setDefaultNameserverError(
-              firstInvalid ? (isValidDnsServer(firstInvalid, true).error ?? t('error.invalidConfig')) : null
+              firstInvalid
+                ? (isValidDnsServer(firstInvalid, true).error ?? t('error.invalidConfig'))
+                : null
             )
           }}
           placeholder="例：223.5.5.5"
@@ -268,7 +276,9 @@ const DNS: React.FC = () => {
             setValues({ ...values, nameserver: arr })
             const firstInvalid = arr.find((f) => !isValidDnsServer(f).ok)
             setNameserverError(
-              firstInvalid ? (isValidDnsServer(firstInvalid).error ?? t('error.invalidConfig')) : null
+              firstInvalid
+                ? (isValidDnsServer(firstInvalid).error ?? t('error.invalidConfig'))
+                : null
             )
           }}
           placeholder="例：tls://dns.alidns.com"

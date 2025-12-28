@@ -27,27 +27,26 @@ const PacEditorModal: React.FC<Props> = (props) => {
       isOpen={true}
       onOpenChange={onCancel}
       scrollBehavior="inside"
-      >
-        <ModalContent className="h-full w-[calc(100%-100px)]">
-          <ModalHeader className="flex pb-0 app-drag">{t('pacEditor.title')}</ModalHeader>
-          <ModalBody className="h-full">
-            <BaseEditor
-              language="javascript"
-              value={currData}
-              onChange={(value) => setCurrData(value || '')}
-            />
-          </ModalBody>
-          <ModalFooter className="pt-0">
-            <Button size="sm" variant="light" onPress={onCancel}>
-              {t('cancel')}
-            </Button>
-            <Button size="sm" color="primary" onPress={() => onConfirm(currData)}>
-              {t('confirm')}
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </div>
+    >
+      <ModalContent className="h-full w-[calc(100%-100px)]">
+        <ModalHeader className="flex pb-0 app-drag">{t('pacEditor.title')}</ModalHeader>
+        <ModalBody className="h-full">
+          <BaseEditor
+            language="javascript"
+            value={currData}
+            onChange={(value) => setCurrData(value || '')}
+          />
+        </ModalBody>
+        <ModalFooter className="pt-0">
+          <Button size="sm" variant="light" onPress={onCancel}>
+            {t('cancel')}
+          </Button>
+          <Button size="sm" color="primary" onPress={() => onConfirm(currData)}>
+            {t('confirm')}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   )
 }
 

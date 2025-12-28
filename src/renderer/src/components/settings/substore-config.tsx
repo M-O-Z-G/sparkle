@@ -130,10 +130,10 @@ const SubStoreConfig: React.FC = () => {
                   setCustomSubStoreUrl(v)
                 }}
               />
-              </SettingItem>
-            ) : (
-              <>
-                <SettingItem title={t('substore.useProxy')} divider>
+            </SettingItem>
+          ) : (
+            <>
+              <SettingItem title={t('substore.useProxy')} divider>
                 <Switch
                   size="sm"
                   isSelected={useProxyInSubStore}
@@ -145,9 +145,9 @@ const SubStoreConfig: React.FC = () => {
                       alert(e)
                     }
                   }}
-                  />
-                </SettingItem>
-                <SettingItem title={t('substore.syncCron')} divider>
+                />
+              </SettingItem>
+              <SettingItem title={t('substore.syncCron')} divider>
                 <div className="flex w-[60%] gap-2">
                   {subStoreBackendSyncCronValue !== subStoreBackendSyncCron && (
                     <Button
@@ -165,15 +165,15 @@ const SubStoreConfig: React.FC = () => {
                         } else {
                           alert(t('error.invalidConfig'))
                         }
-                    }}
-                  >
-                    {t('confirm')}
-                  </Button>
-                )}
-                <Input
-                  size="sm"
-                  value={subStoreBackendSyncCronValue}
-                  placeholder={t('substore.syncCron')}
+                      }}
+                    >
+                      {t('confirm')}
+                    </Button>
+                  )}
+                  <Input
+                    size="sm"
+                    value={subStoreBackendSyncCronValue}
+                    placeholder={t('substore.syncCron')}
                     onValueChange={(v: string) => {
                       setSubStoreBackendSyncCronValue(v)
                     }}
@@ -198,15 +198,15 @@ const SubStoreConfig: React.FC = () => {
                         } else {
                           alert(t('error.invalidConfig'))
                         }
-                    }}
-                  >
-                    {t('confirm')}
-                  </Button>
-                )}
-                <Input
-                  size="sm"
-                  value={subStoreBackendDownloadCronValue}
-                  placeholder={t('substore.downloadCron')}
+                      }}
+                    >
+                      {t('confirm')}
+                    </Button>
+                  )}
+                  <Input
+                    size="sm"
+                    value={subStoreBackendDownloadCronValue}
+                    placeholder={t('substore.downloadCron')}
                     onValueChange={(v: string) => {
                       setSubStoreBackendDownloadCronValue(v)
                     }}
@@ -231,15 +231,15 @@ const SubStoreConfig: React.FC = () => {
                         } else {
                           alert(t('error.invalidConfig'))
                         }
-                    }}
-                  >
-                    {t('confirm')}
-                  </Button>
-                )}
-                <Input
-                  size="sm"
-                  value={subStoreBackendUploadCronValue}
-                  placeholder={t('substore.uploadCron')}
+                      }}
+                    >
+                      {t('confirm')}
+                    </Button>
+                  )}
+                  <Input
+                    size="sm"
+                    value={subStoreBackendUploadCronValue}
+                    placeholder={t('substore.uploadCron')}
                     onValueChange={(v: string) => {
                       setSubStoreBackendUploadCronValue(v)
                     }}
