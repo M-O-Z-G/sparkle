@@ -5,12 +5,8 @@
 > **⚠️ Important Notice**  
 > This is a multilingual fork of the [original Sparkle](https://github.com/xishang0128/sparkle) project. This fork **adds comprehensive multi-language support** (English, Russian, Persian/Farsi, and Simplified Chinese).
 >
-> **Update (January 2025):** The original Sparkle repository has been archived by its author. We respect the original developer's decision and will continue maintaining this multilingual fork independently. This project maintains the same high-quality codebase while focusing on internationalization and accessibility for global users.
+> **Update (December 28 2025):** The original Sparkle repository has been archived by its author. We respect the original developer's decision and will continue maintaining this multilingual fork independently.
 >
-> **Version Numbering:** We use version format `X.Y.Zm#` where:
->
-> - `X.Y.Z` matches the base Sparkle version
-> - `m#` indicates our multilingual fork release number (e.g., `1.6.16m1`)
 >
 > **If you encounter issues:**
 >
