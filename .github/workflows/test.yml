@@ -78,13 +78,29 @@ jobs:
           VERSION=$(jq -r '.version' package.json)
           PR_NUMBER=${{ github.event.pull_request.number }}
 
-          TEST_VERSION="${VERSION}-test-pr${PR_NUMBER}-${GIT_COMMIT_HASH}"
+          # Use shorter version format for Windows compatibility (NSIS has version format restrictions)
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            # Windows: Use numeric version only (e.g., 1.6.16.1)
+            # Extract base version and append PR number as 4th component
+            BASE_VERSION=$(echo "$VERSION" | sed 's/m[0-9]*$//')
+            TEST_VERSION="${BASE_VERSION}.${PR_NUMBER}"
+          else
+            # Linux/macOS: Can use full version string
+            TEST_VERSION="${VERSION}-test-pr${PR_NUMBER}-${GIT_COMMIT_HASH}"
+          fi
           jq --arg version "$TEST_VERSION" '.version = $version' package.json > tmp.json && mv tmp.json package.json
 
       - name: Keep product name lowercase on Linux
         if: matrix.os == 'ubuntu-latest'
         run: |
           sed -i "s/productName: Sparkle/productName: sparkle/" electron-builder.yml
+
+      - name: Pin NSIS Version for Windows
+        if: matrix.os == 'windows-latest'
+        shell: bash
+        run: |
+          # Force electron-builder to use compatible NSIS version
+          echo "NSIS_VERSION=3.0.4.1" >> $GITHUB_ENV
 
       - name: Install Build Tools
         if: matrix.os == 'ubuntu-latest' && matrix.format == 'pacman'

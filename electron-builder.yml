@@ -36,6 +36,8 @@ nsis:
   oneClick: false
   perMachine: true
   createDesktopShortcut: true
+  unicode: true
+  deleteAppDataOnUninstall: false
 mac:
   target:
     - pkg
