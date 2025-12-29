@@ -7,7 +7,6 @@
 >
 > **Update (December 28 2025):** The original Sparkle repository has been archived by its author. We respect the original developer's decision and will continue maintaining this multilingual fork independently.
 >
->
 > **If you encounter issues:**
 >
 > - For **translation/language issues**: Please report them here in this repository
