@@ -88,7 +88,7 @@ const ProfileItem: React.FC<Props> = (props) => {
       } as MenuItem,
       {
         key: 'edit-file',
-        label: t('appearance.editTheme'),
+        label: t('profile.editFile'),
         showDivider: false,
         color: 'default',
         className: ''

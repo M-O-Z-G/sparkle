@@ -8,15 +8,17 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import 'dayjs/locale/zh-cn'
+import 'dayjs/locale/en'
+import 'dayjs/locale/ru'
+import 'dayjs/locale/fa'
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ConfigViewer from './config-viewer'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import { useTranslation } from 'react-i18next'
 import { TiFolder } from 'react-icons/ti'
 
 dayjs.extend(relativeTime)
-dayjs.locale('zh-cn')
 
 interface Props {
   iconOnly?: boolean
@@ -29,8 +31,21 @@ const ProfileCard: React.FC<Props> = (props) => {
   const {
     profileCardStatus = 'col-span-2',
     profileDisplayDate = 'expire',
-    disableAnimation = false
+    disableAnimation = false,
+    language = 'en-US'
   } = appConfig || {}
+
+  // Set dayjs locale based on app language
+  useEffect(() => {
+    const dayjsLocale =
+      {
+        'en-US': 'en',
+        'zh-CN': 'zh-cn',
+        'ru-RU': 'ru',
+        'fa-IR': 'fa'
+      }[language] || 'en'
+    dayjs.locale(dayjsLocale)
+  }, [language])
   const location = useLocation()
   const navigate = useNavigate()
   const match = location.pathname.includes('/profiles')

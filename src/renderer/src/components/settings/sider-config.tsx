@@ -5,10 +5,25 @@ import { RadioGroup, Radio } from '@heroui/react'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import { useTranslation } from 'react-i18next'
 
-const titleMap: Record<string, string> = {}
 const SiderConfig: React.FC = () => {
   const { t } = useTranslation()
   const { appConfig, patchAppConfig } = useAppConfig()
+
+  const titleMap: Record<string, string> = {
+    sysproxyCardStatus: t('sider.cards.sysproxy'),
+    tunCardStatus: t('sider.cards.tun'),
+    profileCardStatus: t('sider.cards.profile'),
+    proxyCardStatus: t('sider.cards.proxy'),
+    ruleCardStatus: t('sider.cards.rule'),
+    resourceCardStatus: t('sider.cards.resource'),
+    overrideCardStatus: t('sider.cards.override'),
+    connectionCardStatus: t('sider.cards.connection'),
+    mihomoCoreCardStatus: t('sider.cards.mihomoCore'),
+    dnsCardStatus: t('sider.cards.dns'),
+    sniffCardStatus: t('sider.cards.sniff'),
+    logCardStatus: t('sider.cards.log'),
+    substoreCardStatus: t('sider.cards.substore')
+  }
   const {
     sysproxyCardStatus = 'col-span-1',
     tunCardStatus = 'col-span-1',
