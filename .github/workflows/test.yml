@@ -20,14 +20,8 @@ jobs:
             arch: x64
             format: 7z
           - os: windows-latest
-            arch: x64
-            format: nsis
-          - os: windows-latest
             arch: arm64
             format: 7z
-          - os: windows-latest
-            arch: arm64
-            format: nsis
 
           - os: ubuntu-latest
             arch: x64
@@ -94,13 +88,6 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sed -i "s/productName: Sparkle/productName: sparkle/" electron-builder.yml
-
-      - name: Pin NSIS Version for Windows
-        if: matrix.os == 'windows-latest'
-        shell: bash
-        run: |
-          # Force electron-builder to use compatible NSIS version
-          echo "NSIS_VERSION=3.0.4.1" >> $GITHUB_ENV
 
       - name: Install Build Tools
         if: matrix.os == 'ubuntu-latest' && matrix.format == 'pacman'
