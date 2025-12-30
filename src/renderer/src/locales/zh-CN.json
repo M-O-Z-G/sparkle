@@ -701,5 +701,16 @@
   "proxies.layout.hidden": "隐藏",
   "proxies.delayTestUrl": "延迟测试地址",
   "proxies.delayTestConcurrency": "延迟测试并发数",
-  "proxies.delayTestTimeout": "延迟测试超时 (毫秒)"
+  "proxies.delayTestTimeout": "延迟测试超时 (毫秒)",
+  "proxies.cols": "列数",
+  "proxies.groupLayout": "组布局",
+  "proxies.proxyLayout": "代理布局",
+  "advanced.delayTestUrl.placeholder": "默认 https://www.gstatic.com/generate_204",
+  "advanced.delayTestConcurrency.placeholder": "默认 50",
+  "advanced.delayTestTimeout.placeholder": "默认 5000",
+  "profiles.searchPlaceholder": "搜索订阅",
+  "mihomo.logRetentionDays": "日志保留天数",
+  "mihomo.taskStatus": "任务状态",
+  "mihomo.taskSchedule": "任务计划",
+  "mihomo.environment": "环境变量"
 }

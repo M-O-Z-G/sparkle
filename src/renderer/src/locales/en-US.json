@@ -701,5 +701,16 @@
   "proxies.layout.hidden": "Hidden",
   "proxies.delayTestUrl": "Delay Test URL",
   "proxies.delayTestConcurrency": "Delay Test Concurrency",
-  "proxies.delayTestTimeout": "Delay Test Timeout (ms)"
+  "proxies.delayTestTimeout": "Delay Test Timeout (ms)",
+  "proxies.cols": "Columns",
+  "proxies.groupLayout": "Group Layout",
+  "proxies.proxyLayout": "Proxy Layout",
+  "advanced.delayTestUrl.placeholder": "Default: https://www.gstatic.com/generate_204",
+  "advanced.delayTestConcurrency.placeholder": "Default: 50",
+  "advanced.delayTestTimeout.placeholder": "Default: 5000",
+  "profiles.searchPlaceholder": "Search profiles",
+  "mihomo.logRetentionDays": "Log Retention Days",
+  "mihomo.taskStatus": "Task Status",
+  "mihomo.taskSchedule": "Task Schedule",
+  "mihomo.environment": "Environment Variables"
 }

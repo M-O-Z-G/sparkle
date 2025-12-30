@@ -59,7 +59,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent className="flag-emoji">
-        <ModalHeader className="flex pb-0">{t('proxies.settings')}</ModalHeader>
+        <ModalHeader className="flex pb-0">{t('proxies.groupSettings')}</ModalHeader>
         <ModalBody className="py-2 gap-1">
           <SettingItem title={t('proxies.cols')} divider>
             <Select
@@ -95,7 +95,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               <Tab key="name" title={t('proxies.sort.name')} />
             </Tabs>
           </SettingItem>
-          <SettingItem title={t('proxies.layout')} divider>
+          <SettingItem title={t('proxies.groupLayout')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -111,7 +111,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               <Tab key="double" title={t('proxies.layout.double')} />
             </Tabs>
           </SettingItem>
-          <SettingItem title={t('proxies.layout')} divider>
+          <SettingItem title={t('proxies.proxyLayout')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -141,7 +141,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               size="sm"
               className="w-[60%]"
               value={url}
-              placeholder="默认 https://www.gstatic.com/generate_204"
+              placeholder={t('advanced.delayTestUrl.placeholder')}
               onValueChange={(v) => {
                 setUrl(v)
                 setUrlDebounce(v)
@@ -154,7 +154,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               size="sm"
               className="w-[100px]"
               value={delayTestConcurrency?.toString()}
-              placeholder="默认 50"
+              placeholder={t('advanced.delayTestConcurrency.placeholder')}
               onValueChange={(v) => {
                 patchAppConfig({ delayTestConcurrency: parseInt(v) })
               }}
@@ -166,7 +166,7 @@ const ProxySettingModal: React.FC<Props> = (props) => {
               size="sm"
               className="w-[100px]"
               value={delayTestTimeout?.toString()}
-              placeholder="默认 5000"
+              placeholder={t('advanced.delayTestTimeout.placeholder')}
               onValueChange={(v) => {
                 patchAppConfig({ delayTestTimeout: parseInt(v) })
               }}

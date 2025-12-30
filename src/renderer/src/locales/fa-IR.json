@@ -701,5 +701,16 @@
   "proxies.layout.hidden": "پنهان",
   "proxies.delayTestUrl": "URL تست تاخیر",
   "proxies.delayTestConcurrency": "همزمانی تست تاخیر",
-  "proxies.delayTestTimeout": "تایم‌اوت تست تاخیر (میلی‌ثانیه)"
+  "proxies.delayTestTimeout": "تایم‌اوت تست تاخیر (میلی‌ثانیه)",
+  "proxies.cols": "ستون‌ها",
+  "proxies.groupLayout": "چیدمان گروه",
+  "proxies.proxyLayout": "چیدمان پروکسی",
+  "advanced.delayTestUrl.placeholder": "پیش‌فرض: https://www.gstatic.com/generate_204",
+  "advanced.delayTestConcurrency.placeholder": "پیش‌فرض: 50",
+  "advanced.delayTestTimeout.placeholder": "پیش‌فرض: 5000",
+  "profiles.searchPlaceholder": "جستجوی پروفایل‌ها",
+  "mihomo.logRetentionDays": "روزهای نگهداری گزارش",
+  "mihomo.taskStatus": "وضعیت وظیفه",
+  "mihomo.taskSchedule": "برنامه وظیفه",
+  "mihomo.environment": "متغیرهای محیطی"
 }

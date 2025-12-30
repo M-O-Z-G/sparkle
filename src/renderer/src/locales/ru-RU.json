@@ -701,5 +701,16 @@
   "proxies.layout.hidden": "Скрыто",
   "proxies.delayTestUrl": "URL для теста задержки",
   "proxies.delayTestConcurrency": "Одновременные тесты задержки",
-  "proxies.delayTestTimeout": "Тайм-аут теста задержки (мс)"
+  "proxies.delayTestTimeout": "Тайм-аут теста задержки (мс)",
+  "proxies.cols": "Колонки",
+  "proxies.groupLayout": "Макет группы",
+  "proxies.proxyLayout": "Макет прокси",
+  "advanced.delayTestUrl.placeholder": "По умолчанию: https://www.gstatic.com/generate_204",
+  "advanced.delayTestConcurrency.placeholder": "По умолчанию: 50",
+  "advanced.delayTestTimeout.placeholder": "По умолчанию: 5000",
+  "profiles.searchPlaceholder": "Поиск профилей",
+  "mihomo.logRetentionDays": "Дни хранения логов",
+  "mihomo.taskStatus": "Статус задачи",
+  "mihomo.taskSchedule": "Расписание задачи",
+  "mihomo.environment": "Переменные окружения"
 }
