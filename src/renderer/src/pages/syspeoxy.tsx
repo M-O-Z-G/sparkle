@@ -10,6 +10,7 @@ import { openUWPTool, triggerSysProxy } from '@renderer/utils/ipc'
 import React, { Key, useEffect, useState } from 'react'
 import ByPassEditorModal from '@renderer/components/sysproxy/bypass-editor-modal'
 import { IoIosHelpCircle } from 'react-icons/io'
+import { useTranslation } from 'react-i18next'
 
 const defaultPacScript = `
 function FindProxyForURL(url, host) {
@@ -18,6 +19,7 @@ function FindProxyForURL(url, host) {
 `
 
 const Sysproxy: React.FC = () => {
+  const { t } = useTranslation()
   const defaultBypass: string[] =
     platform === 'linux'
       ? [
@@ -105,11 +107,11 @@ const Sysproxy: React.FC = () => {
 
   return (
     <BasePage
-      title="系统代理设置"
+      title={t('sysproxy.title')}
       header={
         changed && (
           <Button color="primary" className="app-nodrag" size="sm" onPress={onSave}>
-            保存
+            {t('save')}
           </Button>
         )
       }
@@ -138,43 +140,43 @@ const Sysproxy: React.FC = () => {
         />
       )}
       <SettingCard className="sysproxy-settings">
-        <SettingItem title="代理主机" divider>
+        <SettingItem title={t('sysproxy.host')} divider>
           <Input
             size="sm"
             className="w-[50%]"
             value={values.host}
-            placeholder="默认 127.0.0.1 若无特殊需求请勿修改"
+            placeholder={t('sysproxy.host.placeholder')}
             onValueChange={(v) => {
               setValues({ ...values, host: v })
             }}
           />
         </SettingItem>
-        <SettingItem title="代理模式" divider>
+        <SettingItem title={t('sysproxy.mode')} divider>
           <Tabs
             size="sm"
             color="primary"
             selectedKey={values.mode}
             onSelectionChange={(key: Key) => setValues({ ...values, mode: key as SysProxyMode })}
           >
-            <Tab key="manual" title="手动" />
-            <Tab key="auto" title="PAC" />
+            <Tab key="manual" title={t('sysproxy.mode.manual')} />
+            <Tab key="auto" title={t('sysproxy.mode.auto')} />
           </Tabs>
         </SettingItem>
         {platform === 'win32' && (
-          <SettingItem title="UWP 工具" divider>
+          <SettingItem title={t('sysproxy.uwp')} divider>
             <Button
               size="sm"
               onPress={async () => {
                 await openUWPTool()
               }}
             >
-              打开 UWP 工具
+              {t('sysproxy.uwp.open')}
             </Button>
           </SettingItem>
         )}
         {platform == 'darwin' && (
           <>
-            <SettingItem title="设置方式" divider>
+            <SettingItem title={t('sysproxy.settingMode')} divider>
               <Tabs
                 size="sm"
                 color="primary"
@@ -183,17 +185,17 @@ const Sysproxy: React.FC = () => {
                   setValues({ ...values, settingMode: key as 'exec' | 'service' })
                 }}
               >
-                <Tab key="exec" title="执行命令" />
-                <Tab key="service" title="服务模式" />
+                <Tab key="exec" title={t('sysproxy.settingMode.exec')} />
+                <Tab key="service" title={t('sysproxy.settingMode.service')} />
               </Tabs>
             </SettingItem>
             <SettingItem
-              title="仅为活跃接口设置"
+              title={t('sysproxy.onlyActive')}
               actions={
                 <Tooltip
                   content={
                     <>
-                      <div>开启后，系统代理仅会为当前活跃的网络接口设置，仅服务模式下生效</div>
+                      <div>{t('sysproxy.onlyActive.tip')}</div>
                     </>
                   }
                 >
@@ -216,15 +218,15 @@ const Sysproxy: React.FC = () => {
           </>
         )}
         {values.mode === 'auto' && (
-          <SettingItem title="代理模式">
+          <SettingItem title={t('sysproxy.pac')}>
             <Button size="sm" onPress={() => setOpenPacEditor(true)}>
-              编辑 PAC 脚本
+              {t('sysproxy.pac.edit')}
             </Button>
           </SettingItem>
         )}
         {values.mode === 'manual' && (
           <>
-            <SettingItem title="添加默认代理绕过" divider>
+            <SettingItem title={t('sysproxy.bypass.add')} divider>
               <Button
                 size="sm"
                 onPress={() => {
@@ -234,23 +236,23 @@ const Sysproxy: React.FC = () => {
                   })
                 }}
               >
-                添加默认代理绕过
+                {t('sysproxy.bypass.add')}
               </Button>
             </SettingItem>
-            <SettingItem title="代理绕过列表">
+            <SettingItem title={t('sysproxy.bypass.list')}>
               <Button
                 size="sm"
                 onPress={async () => {
                   setOpenEditor(true)
                 }}
               >
-                编辑
+                {t('edit')}
               </Button>
             </SettingItem>
             <EditableList
               items={values.bypass}
               onChange={(list) => setValues({ ...values, bypass: list as string[] })}
-              placeholder="例：*.baidu.com"
+              placeholder={t('sysproxy.bypass.placeholder')}
               divider={false}
             />
           </>
