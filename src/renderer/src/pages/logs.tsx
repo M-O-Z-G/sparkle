@@ -1,6 +1,7 @@
 import BasePage from '@renderer/components/base/base-page'
 import LogItem from '@renderer/components/logs/log-item'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, Divider, Input } from '@heroui/react'
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
 import { IoLocationSharp } from 'react-icons/io5'
@@ -35,6 +36,7 @@ window.electron.ipcRenderer.on('mihomoLogs', (_e, log: ControllerLog) => {
 })
 
 const Logs: React.FC = () => {
+  const { t } = useTranslation()
   const [logs, setLogs] = useState<ControllerLog[]>(cachedLogs.log)
   const [filter, setFilter] = useState('')
   const [trace, setTrace] = useState(true)
@@ -68,13 +70,13 @@ const Logs: React.FC = () => {
   }, [])
 
   return (
-    <BasePage title="实时日志">
+    <BasePage title={t('log.title')}>
       <div className="sticky top-0 z-40">
         <div className="w-full flex p-2">
           <Input
             size="sm"
             value={filter}
-            placeholder="筛选过滤"
+            placeholder={t('connections.filter')}
             isClearable
             onValueChange={setFilter}
           />
@@ -93,7 +95,7 @@ const Logs: React.FC = () => {
           <Button
             size="sm"
             isIconOnly
-            title="清空日志"
+            title={t('logs.clear')}
             className="ml-2"
             variant="light"
             color="danger"

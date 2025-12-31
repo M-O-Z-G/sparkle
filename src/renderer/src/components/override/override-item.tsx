@@ -18,6 +18,7 @@ import { CSS } from '@dnd-kit/utilities'
 import ExecLogModal from './exec-log-modal'
 import { openFile, restartCore } from '@renderer/utils/ipc'
 import ConfirmModal from '../base/base-confirm'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   info: OverrideItem
@@ -36,6 +37,7 @@ interface MenuItem {
 }
 
 const OverrideItem: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { info, addOverrideItem, removeOverrideItem, mutateOverrideConfig, updateOverrideItem } =
     props
   const [updating, setUpdating] = useState(false)
@@ -59,35 +61,35 @@ const OverrideItem: React.FC<Props> = (props) => {
     const list = [
       {
         key: 'edit-info',
-        label: '编辑信息',
+        label: t('override.editInfo'),
         showDivider: false,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'edit-file',
-        label: '编辑文件',
+        label: t('override.editFile'),
         showDivider: false,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'open-file',
-        label: '打开文件',
+        label: t('override.openFile'),
         showDivider: false,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'exec-log',
-        label: '执行日志',
+        label: t('override.execLog'),
         showDivider: true,
         color: 'default',
         className: ''
       } as MenuItem,
       {
         key: 'delete',
-        label: '删除',
+        label: t('delete'),
         showDivider: false,
         color: 'danger',
         className: 'text-danger'
@@ -162,9 +164,9 @@ const OverrideItem: React.FC<Props> = (props) => {
       {confirmOpen && (
         <ConfirmModal
           onChange={setConfirmOpen}
-          title="确认删除覆写？"
-          confirmText="确认删除"
-          cancelText="取消"
+          title={t('override.confirmDelete')}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
           onConfirm={() => {
             removeOverrideItem(info.id)
             mutateOverrideConfig()
@@ -242,7 +244,7 @@ const OverrideItem: React.FC<Props> = (props) => {
               <div className={`mt-2 flex justify-start`}>
                 {info.global && (
                   <Chip size="sm" variant="dot" color="primary" className="mr-2">
-                    全局
+                    {t('override.global')}
                   </Chip>
                 )}
                 <Chip size="sm" variant="bordered">

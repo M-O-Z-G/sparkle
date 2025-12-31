@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { getOverride } from '@renderer/utils/ipc'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   id: string
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const ExecLogModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { id, onClose } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [logs, setLogs] = useState<string[]>([])
@@ -40,7 +42,7 @@ const ExecLogModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent>
-        <ModalHeader className="flex app-drag">执行日志</ModalHeader>
+        <ModalHeader className="flex app-drag">{t('override.execLog')}</ModalHeader>
         <ModalBody>
           {logs.map((log) => {
             return (
@@ -53,7 +55,7 @@ const ExecLogModal: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button size="sm" variant="light" onPress={onClose}>
-            关闭
+            {t('close')}
           </Button>
         </ModalFooter>
       </ModalContent>

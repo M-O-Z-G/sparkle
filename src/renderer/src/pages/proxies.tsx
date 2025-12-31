@@ -9,6 +9,7 @@ import {
 } from '@renderer/utils/ipc'
 import { FaLocationCrosshairs } from 'react-icons/fa6'
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from 'react-virtuoso'
 import ProxyItem from '@renderer/components/proxies/proxy-item'
 import ProxySettingModal from '@renderer/components/proxies/proxy-setting-modal'
@@ -20,6 +21,7 @@ import { includesIgnoreCase } from '@renderer/utils/includes'
 import { useControledMihomoConfig } from '@renderer/hooks/use-controled-mihomo-config'
 
 const Proxies: React.FC = () => {
+  const { t } = useTranslation()
   const { controledMihomoConfig } = useControledMihomoConfig()
   const { mode = 'rule' } = controledMihomoConfig || {}
   const { groups = [], mutate } = useGroups()
@@ -268,12 +270,12 @@ const Proxies: React.FC = () => {
                       {groups[index].all.length}
                     </Chip>
                     <CollapseInput
-                      title="搜索节点"
+                      title={t('proxies.search')}
                       value={searchValue[index]}
                       onValueChange={(v) => updateSearchValue(index, v)}
                     />
                     <Button
-                      title="定位到当前节点"
+                      title={t('proxies.scrollToCurrent')}
                       variant="light"
                       size="sm"
                       isIconOnly
@@ -282,7 +284,7 @@ const Proxies: React.FC = () => {
                       <FaLocationCrosshairs className="text-lg text-foreground-500" />
                     </Button>
                     <Button
-                      title="延迟测试"
+                      title={t('proxies.testDelay')}
                       variant="light"
                       isLoading={delaying[index]}
                       size="sm"
@@ -371,14 +373,14 @@ const Proxies: React.FC = () => {
 
   return (
     <BasePage
-      title="代理组"
+      title={t('proxies.title')}
       header={
         <Button
           size="sm"
           isIconOnly
           variant="light"
           className="app-nodrag"
-          title="代理组设置"
+          title={t('proxies.settings')}
           onPress={() => setIsSettingModalOpen(true)}
         >
           <MdTune className="text-lg" />
@@ -390,7 +392,7 @@ const Proxies: React.FC = () => {
         <div className="h-full w-full flex justify-center items-center">
           <div className="flex flex-col items-center">
             <MdDoubleArrow className="text-foreground-500 text-[100px]" />
-            <h2 className="text-foreground-500 text-[20px]">直连模式</h2>
+            <h2 className="text-foreground-500 text-[20px]">{t('proxies.directMode')}</h2>
           </div>
         </div>
       ) : (

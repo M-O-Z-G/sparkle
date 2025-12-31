@@ -3,12 +3,14 @@ import { BaseEditor } from '@renderer/components/base/base-editor-lazy'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
 import { readTheme } from '@renderer/utils/ipc'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 interface Props {
   theme: string
   onCancel: () => void
   onConfirm: (script: string) => void
 }
 const CSSEditorModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { theme, onCancel, onConfirm } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [currData, setCurrData] = useState('')
@@ -36,7 +38,7 @@ const CSSEditorModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent className="h-full w-[calc(100%-100px)]">
-        <ModalHeader className="flex pb-0 app-drag">编辑主题</ModalHeader>
+        <ModalHeader className="flex pb-0 app-drag">{t('modal.cssEditor.title')}</ModalHeader>
         <ModalBody className="h-full">
           <BaseEditor
             language="css"
@@ -46,10 +48,10 @@ const CSSEditorModal: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter className="pt-0">
           <Button size="sm" variant="light" onPress={onCancel}>
-            取消
+            {t('cancel')}
           </Button>
           <Button size="sm" color="primary" onPress={() => onConfirm(currData)}>
-            确认
+            {t('confirm')}
           </Button>
         </ModalFooter>
       </ModalContent>

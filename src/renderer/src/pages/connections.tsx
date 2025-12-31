@@ -1,6 +1,7 @@
 import BasePage from '@renderer/components/base/base-page'
 import { mihomoCloseAllConnections, mihomoCloseConnection } from '@renderer/utils/ipc'
 import React, { Key, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Badge, Button, Divider, Input, Select, SelectItem, Tab, Tabs } from '@heroui/react'
 import { calcTraffic } from '@renderer/utils/calc'
 import ConnectionItem from '@renderer/components/connections/connection-item'
@@ -21,6 +22,7 @@ import { MdTune } from 'react-icons/md'
 let cachedConnections: ControllerConnectionDetail[] = []
 
 const Connections: React.FC = () => {
+  const { t } = useTranslation()
   const { controledMihomoConfig } = useControledMihomoConfig()
   const { 'find-process-mode': findProcessMode = 'always' } = controledMihomoConfig || {}
   const [filter, setFilter] = useState('')
@@ -446,7 +448,7 @@ const Connections: React.FC = () => {
 
   return (
     <BasePage
-      title="连接"
+      title={t('connections.title')}
       header={
         <>
           <div className="flex">
@@ -467,7 +469,7 @@ const Connections: React.FC = () => {
             >
               <Button
                 className="app-nodrag ml-1"
-                title={tab === 'active' ? '关闭全部连接' : '清空已关闭连接'}
+                title={tab === 'active' ? t('connections.closeAll') : t('connections.clearClosed')}
                 isIconOnly
                 size="sm"
                 variant="light"
@@ -494,7 +496,7 @@ const Connections: React.FC = () => {
             isIconOnly
             className="app-nodrag"
             variant="light"
-            title="连接设置"
+            title={t('connections.settings')}
             onPress={() => setIsSettingModalOpen(true)}
           >
             <MdTune className="text-lg" />
@@ -529,7 +531,7 @@ const Connections: React.FC = () => {
                   content={activeConnections.length}
                   showOutline={false}
                 >
-                  <span className="p-1">活动中</span>
+                  <span className="p-1">{t('connections.active')}</span>
                 </Badge>
               }
             />
@@ -544,7 +546,7 @@ const Connections: React.FC = () => {
                   content={closedConnections.length}
                   showOutline={false}
                 >
-                  <span className="p-1">已关闭</span>
+                  <span className="p-1">{t('connections.closed')}</span>
                 </Badge>
               }
             />
@@ -553,7 +555,7 @@ const Connections: React.FC = () => {
             variant="flat"
             size="sm"
             value={filter}
-            placeholder="筛选过滤"
+            placeholder={t('connections.filter')}
             isClearable
             onValueChange={setFilter}
           />
@@ -566,12 +568,12 @@ const Connections: React.FC = () => {
             disallowEmptySelection={true}
             onSelectionChange={handleOrderByChange}
           >
-            <SelectItem key="upload">上传量</SelectItem>
-            <SelectItem key="download">下载量</SelectItem>
-            <SelectItem key="uploadSpeed">上传速度</SelectItem>
-            <SelectItem key="downloadSpeed">下载速度</SelectItem>
-            <SelectItem key="time">时间</SelectItem>
-            <SelectItem key="process">进程名称</SelectItem>
+            <SelectItem key="upload">{t('connections.upload')}</SelectItem>
+            <SelectItem key="download">{t('connections.download')}</SelectItem>
+            <SelectItem key="uploadSpeed">{t('connections.uploadSpeed')}</SelectItem>
+            <SelectItem key="downloadSpeed">{t('connections.downloadSpeed')}</SelectItem>
+            <SelectItem key="time">{t('connections.time')}</SelectItem>
+            <SelectItem key="process">{t('connections.process')}</SelectItem>
           </Select>
           <Button size="sm" isIconOnly className="bg-content2" onPress={handleDirectionToggle}>
             {connectionDirection === 'asc' ? (

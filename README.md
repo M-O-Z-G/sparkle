@@ -1,169 +1,180 @@
-# Sparkle
+# Sparkle (Multilingual Fork)
 
-<h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI</h3>
+<h3 align="center">Another <a href="https://github.com/MetaCubeX/mihomo">Mihomo</a> GUI with Multi-language Support</h3>
 
-<p align="center">
-  <a href="https://github.com/xishang0128/sparkle/releases">
-    <img src="https://img.shields.io/github/release/xishang0128/sparkle/all.svg">
-  </a>
-  <a href="https://t.me/+y7rcYjEKIiI1NzZl">
-    <img src="https://img.shields.io/badge/Telegram-Group-blue?logo=telegram">
-  </a>
-</p>
+> **⚠️ Important Notice**  
+> This is a multilingual fork of the [original Sparkle](https://github.com/xishang0128/sparkle) project. This fork **adds comprehensive multi-language support** (English, Russian, Persian/Farsi, and Simplified Chinese).
+>
+> **Update (December 28 2025):** The original Sparkle repository has been archived by its author. We respect the original developer's decision and will continue maintaining this multilingual fork independently.
+>
+> **If you encounter issues:**
+>
+> - For **translation/language issues**: Please report them here in this repository
+> - For **core functionality issues**: We will investigate and fix them in this fork as the original repository is now archived
+>
+> **Supported Languages:**
+>
+> - 🇺🇸 English (default)
+> - 🇨🇳 简体中文 (Simplified Chinese)
+> - 🇷🇺 Русский (Russian)
+> - 🇮🇷 فارسی (Persian/Farsi)
 
-## 特性
+## Features
 
-- [x] 开箱即用，无需服务模式的 Tun
-- [x] 多种配色主题可选，UI 焕然一新
-- [x] 支持大部分 Mihomo 常用配置修改
-- [x] 内置稳定版和预览版 Mihomo 内核
-- [x] 通过 WebDAV 一键备份和恢复配置
-- [x] 强大的覆写功能，任意修订配置文件
-- [x] 深度集成 Sub-Store，轻松管理订阅
+- [x] Out-of-the-box TUN without service mode
+- [x] Multiple color themes available, brand new UI
+- [x] Support for most common Mihomo configuration modifications
+- [x] Built-in stable and preview version of Mihomo core
+- [x] One-click backup and restore configuration via WebDAV
+- [x] Powerful override function, arbitrary modification of configuration files
+- [x] Deep integration with Sub-Store for easy subscription management
+- [x] **Multi-language interface** (English, Chinese, Russian, Persian)
 
-## 开发
+## Development
 
-本项目为自用，绝大部分 pr 可能都不会合并，你可以自行 fork 修改。
+This project is a community-maintained multilingual fork. We welcome contributions for translations, bug fixes, and feature improvements. Since the original Sparkle repository has been archived, we are now the primary active development repository for this application with international language support.
 
-### 环境要求
+### Environment Requirements
 
-- **Node.js**: >= 20.0.0 (推荐使用 LTS 版本)
-- **pnpm**: >= 9.0.0 (必需)
-- **Git**: 最新版本
+- **Node.js**: >= 20.0.0 (LTS version recommended)
+- **pnpm**: >= 9.0.0 (required)
+- **Git**: Latest version
 
-### 技术架构
+### Technology Stack
 
-Sparkle 基于 Electron + React + TypeScript 构建
+Sparkle is built on Electron + React + TypeScript
 
-#### 前端技术栈
+#### Frontend Technology Stack
 
-- **React 19** - 用户界面框架
-- **TypeScript** - 类型安全的 JavaScript
-- **HeroUI (NextUI)** - UI 组件库
-- **Tailwind CSS** - 原子化 CSS 框架
-- **Monaco Editor** - 代码编辑器
+- **React 19** - User interface framework
+- **TypeScript** - Type-safe JavaScript
+- **HeroUI (NextUI)** - UI component library
+- **Tailwind CSS** - Atomic CSS framework
+- **Monaco Editor** - Code editor
+- **react-i18next** - Internationalization framework
 
-#### 后端技术栈
+#### Backend Technology Stack
 
-- **Electron** - 应用主进程
-- **Mihomo Core** - 代理内核
-- **sysproxy-go** - 系统代理集成
+- **Electron** - Application main process
+- **Mihomo Core** - Proxy core
+- **sysproxy-go** - System proxy integration
 
-### 快速开始
+### Quick Start
 
-1. **克隆项目**
+1. **Clone the project**
 
 ```bash
-git clone https://github.com/xishang0128/sparkle.git
+git clone https://github.com/YOUR_FORK_URL/sparkle.git
 cd sparkle
 ```
 
-2. **安装依赖**
+2. **Install dependencies**
 
 ```bash
 pnpm install
 ```
 
-3. **处理 Electron 安装问题**（如果遇到 pnpm dev 等命令无法成功运行）
+3. **Handle Electron installation issues** (if pnpm dev and other commands fail to run successfully)
 
 ```bash
-# 如果 Electron 没有正确安装，执行以下命令
+# If Electron is not installed correctly, execute the following commands
 cd node_modules/electron
 node install.js
 cd ../..
 ```
 
-4. **启动开发服务器**
+4. **Start development server**
 
 ```bash
 pnpm dev
 ```
 
-### 注意事项
+### Notes
 
-windows 开发时可能会出现页面白屏，关闭 tun（虚拟网卡）即可
+On Windows, there may be a white screen during development, just disable TUN (virtual network adapter)
 
-### 项目结构
+### Project Structure
 
 ```
 sparkle/
 ├── src/
-│   ├── main/               # Electron 主进程
-│   │   ├── core/           # 内核管理
-│   │   ├── config/         # 配置管理
-│   │   ├── resolve/        # 解析器
-│   │   ├── sys/            # 系统集成
-│   │   └── utils/          # 工具函数
-│   ├── renderer/           # Electron 渲染进程（前端界面）
+│   ├── main/               # Electron main process
+│   │   ├── core/           # Core management
+│   │   ├── config/         # Configuration management
+│   │   ├── resolve/        # Resolvers
+│   │   ├── sys/            # System integration
+│   │   └── utils/          # Utility functions
+│   ├── renderer/           # Electron renderer process (frontend interface)
 │   │   ├── src/
-│   │   │   ├── assets/     # 静态资源
-│   │   │   ├── components/ # React 组件
-│   │   │   ├── pages/      # 页面组件
-│   │   │   ├── hooks/      # 自定义 hooks
-│   │   │   ├── routes/     # 路由配置
-│   │   │   └── utils/      # 前端工具
-│   │   └── index.html      # 渲染进程入口 HTML
-│   ├── preload/            # Electron 预加载脚本（进程间通信桥梁）
-│   │   ├── index.ts        # 预加载脚本主文件
-│   │   └── index.d.ts      # 预加载脚本类型定义
-│   └── shared/             # 共享资源
-│       └── types           # 全局类型定义
-├── resources/              # 应用资源文件
-├── build/                  # 构建配置
-├── extra/                  # 额外资源
-├── dist/                   # 构建输出目录
-├── electron-builder.yml    # 打包配置
-├── package.json            # 项目配置
-└── README.md               # 项目说明
+│   │   │   ├── assets/     # Static assets
+│   │   │   ├── components/ # React components
+│   │   │   ├── pages/      # Page components
+│   │   │   ├── hooks/      # Custom hooks
+│   │   │   ├── locales/    # Translation files (i18n)
+│   │   │   ├── routes/     # Route configuration
+│   │   │   └── utils/      # Frontend utilities
+│   │   └── index.html      # Renderer process entry HTML
+│   ├── preload/            # Electron preload scripts (inter-process communication bridge)
+│   │   ├── index.ts        # Preload script main file
+│   │   └── index.d.ts      # Preload script type definitions
+│   └── shared/             # Shared resources
+│       └── types           # Global type definitions
+├── resources/              # Application resource files
+├── build/                  # Build configuration
+├── extra/                  # Extra resources
+├── dist/                   # Build output directory
+├── electron-builder.yml    # Package configuration
+├── package.json            # Project configuration
+└── README.md               # Project documentation
 ```
 
-### 可用脚本
+### Available Scripts
 
-#### 开发命令
+#### Development Commands
 
-- `pnpm dev` - 启动开发服务器（前端热重载，后端需要手动重启）
-- `pnpm typecheck` - TypeScript 类型检查
-- `pnpm typecheck:node` - 主进程类型检查
-- `pnpm typecheck:web` - 渲染进程类型检查
-- `pnpm lint` - 运行代码检查
-- `pnpm format` - 格式化代码
+- `pnpm dev` - Start development server (frontend hot reload, backend requires manual restart)
+- `pnpm typecheck` - TypeScript type checking
+- `pnpm typecheck:node` - Main process type checking
+- `pnpm typecheck:web` - Renderer process type checking
+- `pnpm lint` - Run code linting
+- `pnpm format` - Format code
 
-#### 构建命令
+#### Build Commands
 
-- `pnpm build:win` - 构建 Windows 版本
-- `pnpm build:mac` - 构建 macOS 版本
-- `pnpm build:linux` - 构建 Linux 版本
+- `pnpm build:win` - Build Windows version
+- `pnpm build:mac` - Build macOS version
+- `pnpm build:linux` - Build Linux version
 
-#### 其他命令
+#### Other Commands
 
-- `pnpm prepare` - 准备构建环境
-- `pnpm postinstall` - 安装 Electron 依赖
+- `pnpm prepare` - Prepare build environment
+- `pnpm postinstall` - Install Electron dependencies
 
-### 构建发布
+### Build and Release
 
-#### 环境准备
+#### Environment Preparation
 
-根据目标平台准备相应的构建环境：
+Prepare the corresponding build environment according to the target platform:
 
-**Windows 构建：**
+**Windows build:**
 
 ```bash
 pnpm build:win
 ```
 
-**macOS 构建：**
+**macOS build:**
 
 ```bash
 pnpm build:mac
 ```
 
-**Linux 构建：**
+**Linux build:**
 
 ```bash
 pnpm build:linux
 ```
 
-**指定架构：**
+**Specify architecture:**
 
 ```bash
 pnpm build:win --x64/--arm64
@@ -171,7 +182,7 @@ pnpm build:mac --arm64/--x64
 pnpm build:linux --x64/--arm64
 ```
 
-**指定产物类型：**
+**Specify artifact type:**
 
 ```bash
 pnpm build:win 7z/nsis
@@ -179,7 +190,7 @@ pnpm build:linux deb/rpm/pacman
 pnpm build:mac pkg/dmg
 ```
 
-**指定架构和产物类型：**
+**Specify architecture and artifact type:**
 
 ```bash
 pnpm build:win 7z --x64
@@ -187,63 +198,96 @@ pnpm build:mac pkg --arm64
 pnpm build:linux deb --x64
 ```
 
-#### 构建产物
+#### Build Artifacts
 
-- **Windows**: `.exe` 安装包和 `.7z` 便携版
-- **macOS**: `.pkg` 安装包
-- **Linux**: `.deb`、`.rpm`、`.pkg.tar.xz(pacman)` 等格式
+- **Windows**: `.exe` installer and `.7z` portable version
+- **macOS**: `.pkg` installer
+- **Linux**: `.deb`, `.rpm`, `.pkg.tar.xz (pacman)` and other formats
 
-### 常见问题
+### Common Issues
 
-#### 包管理器要求
+#### Package Manager Requirement
 
-本项目使用 pnpm 作为包管理器。
+This project uses pnpm as the package manager.
 
-确保使用 pnpm 9.0.0 或更高版本：
+Make sure to use pnpm 9.0.0 or higher:
 
 ```bash
 pnpm --version
 ```
 
-#### Node.js 版本要求
+#### Node.js Version Requirement
 
-确保使用 Node.js 20.0.0 或更高版本：
+Make sure to use Node.js 20.0.0 or higher:
 
 ```bash
 node --version
 ```
 
-#### 开发环境问题
+#### Development Environment Issues
 
-- 确保 Node.js 版本 >= 20.0.0
-- 使用 pnpm 进行依赖管理
+- Make sure Node.js version >= 20.0.0
+- Use pnpm for dependency management
 
-### 贡献指南
+### Contributing Translations
 
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送分支 (`git push origin feature/AmazingFeature`)
-5. 创建 Pull Request
+We welcome contributions to improve or add new translations! Translation files are located in `src/renderer/src/locales/`:
 
-### 开发注意事项
+- `en-US.json` - English
+- `zh-CN.json` - Simplified Chinese
+- `ru-RU.json` - Russian
+- `fa-IR.json` - Persian/Farsi
 
-- 请确保代码通过 ESLint 检查
-- 提交前运行 `pnpm format` 格式化代码
-- 遵循现有的代码风格和命名规范
-- 添加新功能时请更新相关文档
-- 主进程代码修改后需要重启开发服务器
-- 渲染进程代码支持热重载
-- 所有命令都使用 pnpm 执行
-- 修改类型定义后需要重启 TypeScript 服务
-- 预加载脚本修改后需要重启应用
+To add a new language or improve existing translations:
 
-## Star History
+1. Fork this repository
+2. Add or edit the appropriate JSON file in `src/renderer/src/locales/`
+3. Update `src/renderer/src/locales/i18n.ts` to include the new language
+4. Test your changes
+5. Submit a Pull Request
 
-<a href="https://www.star-history.com/#xishang0128/sparkle&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xishang0128/sparkle&type=Date" />
- </picture>
-</a>
+### Contribution Guide
+
+We welcome all types of contributions to this project:
+
+**For translations:**
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/improve-translations`)
+3. Edit translation files in `src/renderer/src/locales/`
+4. Commit changes (`git commit -m 'Improve Russian translations'`)
+5. Push to branch (`git push origin feature/improve-translations`)
+6. Create a Pull Request
+
+**For bug fixes and features:**
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b fix/issue-description`)
+3. Make your changes
+4. Test thoroughly
+5. Commit changes with descriptive messages
+6. Push to branch and create a Pull Request
+
+Since the original Sparkle repository is now archived, we handle all types of issues and improvements in this fork.
+
+### Development Notes
+
+- Make sure code passes ESLint checks
+- Run `pnpm format` to format code before committing
+- Follow existing code style and naming conventions
+- For translation changes, update all language files to maintain consistency
+- Main process code modifications require restarting the development server
+- Renderer process code supports hot reloading
+- All commands use pnpm
+- After modifying type definitions, TypeScript service needs to be restarted
+- Preload script modifications require restarting the application
+
+## Credits
+
+- Original Sparkle by [xishang0128](https://github.com/xishang0128/sparkle)
+- Based on [Clash Party](https://github.com/mihomo-party-org/clash-party) i18n implementation
+- [Mihomo](https://github.com/MetaCubeX/mihomo) core
+
+## License
+
+Same as the original Sparkle project.

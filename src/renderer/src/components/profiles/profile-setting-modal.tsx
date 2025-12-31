@@ -18,12 +18,14 @@ import { getGistUrl, getUserAgent } from '@renderer/utils/ipc'
 import debounce from '@renderer/utils/debounce'
 import { IoIosHelpCircle } from 'react-icons/io'
 import { BiCopy } from 'react-icons/bi'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   onClose: () => void
 }
 
 const ProfileSettingModal: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { onClose } = props
   const { appConfig, patchAppConfig } = useAppConfig()
 
@@ -66,9 +68,9 @@ const ProfileSettingModal: React.FC<Props> = (props) => {
       scrollBehavior="inside"
     >
       <ModalContent className="flag-emoji">
-        <ModalHeader className="flex pb-0">订阅设置</ModalHeader>
+        <ModalHeader className="flex pb-0">{t('profiles.settings')}</ModalHeader>
         <ModalBody className="py-2 gap-1">
-          <SettingItem title="显示日期" divider>
+          <SettingItem title={t('profile.displayDate')} divider>
             <Tabs
               size="sm"
               color="primary"
@@ -79,14 +81,14 @@ const ProfileSettingModal: React.FC<Props> = (props) => {
                 })
               }}
             >
-              <Tab key="update" title="更新时间" />
-              <Tab key="expire" title="到期时间" />
+              <Tab key="update" title={t('profile.updated')} />
+              <Tab key="expire" title={t('profile.expire')} />
             </Tabs>
           </SettingItem>
           <SettingItem
-            title="为不同订阅分别指定工作目录"
+            title={t('profile.diffWorkDir')}
             actions={
-              <Tooltip content="开启后可以避免不同订阅中存在相同代理组名时无法分别保存选择的节点">
+              <Tooltip content={t('profile.diffWorkDirHelp')}>
                 <Button isIconOnly size="sm" variant="light">
                   <IoIosHelpCircle className="text-lg" />
                 </Button>
@@ -102,12 +104,12 @@ const ProfileSettingModal: React.FC<Props> = (props) => {
               }}
             />
           </SettingItem>
-          <SettingItem title="订阅拉取 UA" divider>
+          <SettingItem title={t('profile.subscriptionUA')} divider>
             <Input
               size="sm"
               className="w-[60%]"
               value={ua}
-              placeholder={`默认 ${defaultUserAgent}`}
+              placeholder={`${t('profile.defaultUA')} ${defaultUserAgent}`}
               onValueChange={(v) => {
                 setUa(v)
                 setUaDebounce(v)
@@ -115,10 +117,10 @@ const ProfileSettingModal: React.FC<Props> = (props) => {
             />
           </SettingItem>
           <SettingItem
-            title="同步运行时配置到 Gist"
+            title={t('profile.syncGist')}
             actions={
               <Button
-                title="复制 Gist URL"
+                title={t('profile.copyGistUrl')}
                 isIconOnly
                 size="sm"
                 variant="light"
@@ -151,7 +153,7 @@ const ProfileSettingModal: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button size="sm" variant="light" onPress={onClose}>
-            关闭
+            {t('close')}
           </Button>
         </ModalFooter>
       </ModalContent>

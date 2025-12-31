@@ -20,14 +20,8 @@ jobs:
             arch: x64
             format: 7z
           - os: windows-latest
-            arch: x64
-            format: nsis
-          - os: windows-latest
             arch: arm64
             format: 7z
-          - os: windows-latest
-            arch: arm64
-            format: nsis
 
           - os: ubuntu-latest
             arch: x64
@@ -77,8 +71,17 @@ jobs:
           GIT_COMMIT_HASH=$(git rev-parse --short HEAD)
           VERSION=$(jq -r '.version' package.json)
           PR_NUMBER=${{ github.event.pull_request.number }}
-          
-          TEST_VERSION="${VERSION}-test-pr${PR_NUMBER}-${GIT_COMMIT_HASH}"
+
+          # Use shorter version format for Windows compatibility (NSIS has version format restrictions)
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            # Windows: Use numeric version only (e.g., 1.6.16.1)
+            # Extract base version and append PR number as 4th component
+            BASE_VERSION=$(echo "$VERSION" | sed 's/m[0-9]*$//')
+            TEST_VERSION="${BASE_VERSION}.${PR_NUMBER}"
+          else
+            # Linux/macOS: Can use full version string
+            TEST_VERSION="${VERSION}-test-pr${PR_NUMBER}-${GIT_COMMIT_HASH}"
+          fi
           jq --arg version "$TEST_VERSION" '.version = $version' package.json > tmp.json && mv tmp.json package.json
 
       - name: Keep product name lowercase on Linux
@@ -148,11 +151,22 @@ jobs:
         run: |
           set -e
           VERSION=$(jq -r '.version' package.json)
+          # Find the actual .deb file (handles test version suffixes)
+          DEB_FILE=$(ls dist/sparkle-linux-*-loong64.deb 2>/dev/null | head -n 1)
+          if [ -z "$DEB_FILE" ]; then
+            echo "Error: loong64 .deb file not found in dist/"
+            ls -la dist/
+            exit 1
+          fi
+          echo "Found .deb file: $DEB_FILE"
           mkdir workdir
-          fakeroot dpkg-deb -R dist/sparkle-linux-${VERSION}-loong64.deb workdir
+          fakeroot dpkg-deb -R "$DEB_FILE" workdir
           fakeroot sed -i 's/^Architecture: .*/Architecture: loongarch64/' workdir/DEBIAN/control
-          fakeroot dpkg-deb -b workdir dist/sparkle-linux-${VERSION}-loongarch64.deb
+          # Generate output filename based on input
+          OUT_FILE="${DEB_FILE/-loong64.deb/-loongarch64.deb}"
+          fakeroot dpkg-deb -b workdir "$OUT_FILE"
           rm -rf workdir
+          echo "Created $OUT_FILE"
 
       - name: Upload Build Artifacts
         if: always()

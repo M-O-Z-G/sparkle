@@ -10,8 +10,10 @@ import { platform } from '@renderer/utils/init'
 import { Button, Input, Switch } from '@heroui/react'
 import { FaNetworkWired } from 'react-icons/fa'
 import InterfaceModal from '@renderer/components/mihomo/interface-modal'
+import { useTranslation } from 'react-i18next'
 
 const PortSetting: React.FC = () => {
+  const { t } = useTranslation()
   const { appConfig } = useAppConfig()
   const { sysProxy, onlyActiveDevice = false } = appConfig || {}
   const { controledMihomoConfig, patchControledMihomoConfig } = useControledMihomoConfig()
@@ -63,8 +65,8 @@ const PortSetting: React.FC = () => {
   return (
     <>
       {lanOpen && <InterfaceModal onClose={() => setLanOpen(false)} />}
-      <SettingCard title="端口设置">
-        <SettingItem title="混合端口" divider>
+      <SettingCard title={t('mihomo.portSettings')}>
+        <SettingItem title={t('mihomo.mixedPort')} divider>
           <div className="flex">
             {mixedPortInput !== mixedPort && (
               <Button
@@ -80,7 +82,7 @@ const PortSetting: React.FC = () => {
                   }
                 }}
               >
-                确认
+                {t('confirm')}
               </Button>
             )}
             <Input
@@ -96,7 +98,7 @@ const PortSetting: React.FC = () => {
             />
           </div>
         </SettingItem>
-        <SettingItem title="Socks 端口" divider>
+        <SettingItem title={t('mihomo.socksPort')} divider>
           <div className="flex">
             {socksPortInput !== socksPort && (
               <Button
@@ -108,7 +110,7 @@ const PortSetting: React.FC = () => {
                   onChangeNeedRestart({ 'socks-port': socksPortInput })
                 }}
               >
-                确认
+                {t('confirm')}
               </Button>
             )}
 
@@ -125,7 +127,7 @@ const PortSetting: React.FC = () => {
             />
           </div>
         </SettingItem>
-        <SettingItem title="Http 端口" divider>
+        <SettingItem title={t('mihomo.httpPort')} divider>
           <div className="flex">
             {httpPortInput !== httpPort && (
               <Button
@@ -137,7 +139,7 @@ const PortSetting: React.FC = () => {
                   onChangeNeedRestart({ port: httpPortInput })
                 }}
               >
-                确认
+                {t('confirm')}
               </Button>
             )}
 
@@ -155,7 +157,7 @@ const PortSetting: React.FC = () => {
           </div>
         </SettingItem>
         {platform !== 'win32' && (
-          <SettingItem title="Redir 端口" divider>
+          <SettingItem title={t('mihomo.redirPort')} divider>
             <div className="flex">
               {redirPortInput !== redirPort && (
                 <Button
@@ -167,7 +169,7 @@ const PortSetting: React.FC = () => {
                     onChangeNeedRestart({ 'redir-port': redirPortInput })
                   }}
                 >
-                  确认
+                  {t('confirm')}
                 </Button>
               )}
 
@@ -186,7 +188,7 @@ const PortSetting: React.FC = () => {
           </SettingItem>
         )}
         {platform === 'linux' && (
-          <SettingItem title="TProxy 端口" divider>
+          <SettingItem title={t('mihomo.tproxyPort')} divider>
             <div className="flex">
               {tproxyPortInput !== tproxyPort && (
                 <Button
@@ -198,7 +200,7 @@ const PortSetting: React.FC = () => {
                     onChangeNeedRestart({ 'tproxy-port': tproxyPortInput })
                   }}
                 >
-                  确认
+                  {t('confirm')}
                 </Button>
               )}
 
@@ -217,7 +219,7 @@ const PortSetting: React.FC = () => {
           </SettingItem>
         )}
         <SettingItem
-          title="允许局域网连接"
+          title={t('mihomo.allowLan')}
           actions={
             <Button
               size="sm"
@@ -242,7 +244,7 @@ const PortSetting: React.FC = () => {
         </SettingItem>
         {allowLan && (
           <>
-            <SettingItem title="允许连接的 IP 段">
+            <SettingItem title={t('mihomo.allowedIPs')}>
               {lanAllowedIpsInput.join('') !== lanAllowedIps.join('') && (
                 <Button
                   size="sm"
@@ -251,16 +253,16 @@ const PortSetting: React.FC = () => {
                     onChangeNeedRestart({ 'lan-allowed-ips': lanAllowedIpsInput })
                   }}
                 >
-                  确认
+                  {t('confirm')}
                 </Button>
               )}
             </SettingItem>
             <EditableList
               items={lanAllowedIpsInput}
               onChange={(items) => setLanAllowedIpsInput(items as string[])}
-              placeholder="IP 段"
+              placeholder={t('mihomo.ipSegment')}
             />
-            <SettingItem title="禁止连接的 IP 段">
+            <SettingItem title={t('mihomo.disallowedIPs')}>
               {lanDisallowedIpsInput.join('') !== lanDisallowedIps.join('') && (
                 <Button
                   size="sm"
@@ -269,37 +271,37 @@ const PortSetting: React.FC = () => {
                     onChangeNeedRestart({ 'lan-disallowed-ips': lanDisallowedIpsInput })
                   }}
                 >
-                  确认
+                  {t('confirm')}
                 </Button>
               )}
             </SettingItem>
             <EditableList
               items={lanDisallowedIpsInput}
               onChange={(items) => setLanDisallowedIpsInput(items as string[])}
-              placeholder="IP 段"
+              placeholder={t('mihomo.ipSegment')}
             />
           </>
         )}
-        <SettingItem title="用户验证">
+        <SettingItem title={t('mihomo.userAuth')}>
           {authenticationInput.join() !== authentication.join() && (
             <Button
               size="sm"
               color="primary"
               onPress={() => onChangeNeedRestart({ authentication: authenticationInput })}
             >
-              确认
+              {t('confirm')}
             </Button>
           )}
         </SettingItem>
         <EditableList
           items={authenticationInput}
           onChange={(items) => setAuthenticationInput(items as string[])}
-          placeholder="用户名"
-          part2Placeholder="密码"
+          placeholder={t('mihomo.username')}
+          part2Placeholder={t('mihomo.password')}
           parse={parseAuth}
           format={formatAuth}
         />
-        <SettingItem title="允许跳过验证的 IP 段">
+        <SettingItem title={t('mihomo.skipAuthIPs')}>
           {skipAuthPrefixesInput.join('') !== skipAuthPrefixes.join('') && (
             <Button
               size="sm"
@@ -308,14 +310,14 @@ const PortSetting: React.FC = () => {
                 onChangeNeedRestart({ 'skip-auth-prefixes': skipAuthPrefixesInput })
               }}
             >
-              确认
+              {t('confirm')}
             </Button>
           )}
         </SettingItem>
         <EditableList
           items={skipAuthPrefixesInput}
           onChange={(items) => setSkipAuthPrefixesInput(items as string[])}
-          placeholder="IP 段"
+          placeholder={t('mihomo.ipSegment')}
           disableFirst
           divider={false}
         />

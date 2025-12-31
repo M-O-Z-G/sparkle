@@ -4,6 +4,7 @@ import { BaseEditor } from '../base/base-editor-lazy'
 import { getFileStr, setFileStr } from '@renderer/utils/ipc'
 import yaml from 'js-yaml'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
+import { useTranslation } from 'react-i18next'
 type Language = 'yaml' | 'javascript' | 'css' | 'json' | 'text'
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   format?: string
 }
 const Viewer: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { type, path, title, format, privderType, onClose } = props
   const { appConfig: { disableAnimation = false } = {} } = useAppConfig()
   const [currData, setCurrData] = useState('')
@@ -93,7 +95,7 @@ const Viewer: React.FC<Props> = (props) => {
         </ModalBody>
         <ModalFooter className="pt-0">
           <Button size="sm" variant="light" onPress={onClose}>
-            关闭
+            {t('close')}
           </Button>
           {type == 'File' && (
             <Button
@@ -104,7 +106,7 @@ const Viewer: React.FC<Props> = (props) => {
                 onClose()
               }}
             >
-              保存
+              {t('save')}
             </Button>
           )}
         </ModalFooter>

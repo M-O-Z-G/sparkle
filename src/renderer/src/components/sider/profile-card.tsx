@@ -8,27 +8,44 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import 'dayjs/locale/zh-cn'
+import 'dayjs/locale/en'
+import 'dayjs/locale/ru'
+import 'dayjs/locale/fa'
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ConfigViewer from './config-viewer'
 import { useAppConfig } from '@renderer/hooks/use-app-config'
+import { useTranslation } from 'react-i18next'
 import { TiFolder } from 'react-icons/ti'
 
 dayjs.extend(relativeTime)
-dayjs.locale('zh-cn')
 
 interface Props {
   iconOnly?: boolean
 }
 
 const ProfileCard: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { appConfig, patchAppConfig } = useAppConfig()
   const { iconOnly } = props
   const {
     profileCardStatus = 'col-span-2',
     profileDisplayDate = 'expire',
-    disableAnimation = false
+    disableAnimation = false,
+    language = 'en-US'
   } = appConfig || {}
+
+  // Set dayjs locale based on app language
+  useEffect(() => {
+    const dayjsLocale =
+      {
+        'en-US': 'en',
+        'zh-CN': 'zh-cn',
+        'ru-RU': 'ru',
+        'fa-IR': 'fa'
+      }[language] || 'en'
+    dayjs.locale(dayjsLocale)
+  }, [language])
   const location = useLocation()
   const navigate = useNavigate()
   const match = location.pathname.includes('/profiles')
@@ -60,7 +77,7 @@ const ProfileCard: React.FC<Props> = (props) => {
   if (iconOnly) {
     return (
       <div className={`${profileCardStatus} flex justify-center`}>
-        <Tooltip content="订阅管理" placement="right">
+        <Tooltip content={t('siderCard.subscription')} placement="right">
           <Button
             size="sm"
             isIconOnly
@@ -113,7 +130,7 @@ const ProfileCard: React.FC<Props> = (props) => {
                 <Button
                   isIconOnly
                   size="sm"
-                  title="查看当前运行时配置"
+                  title={t('siderCard.runtimeConfig')}
                   variant="light"
                   color="default"
                   onPress={() => {
@@ -160,7 +177,9 @@ const ProfileCard: React.FC<Props> = (props) => {
                       await patchAppConfig({ profileDisplayDate: 'update' })
                     }}
                   >
-                    {extra.expire ? dayjs.unix(extra.expire).format('YYYY-MM-DD') : '长期有效'}
+                    {extra.expire
+                      ? dayjs.unix(extra.expire).format('YYYY-MM-DD')
+                      : t('profile.noExpire')}
                   </Button>
                 ) : (
                   <Button
@@ -187,7 +206,7 @@ const ProfileCard: React.FC<Props> = (props) => {
                   variant="bordered"
                   className={`${match ? 'text-primary-foreground border-primary-foreground' : 'border-primary text-primary'}`}
                 >
-                  远程
+                  {t('profile.remote')}
                 </Chip>
                 <small>{dayjs(info.updated).fromNow()}</small>
               </div>
@@ -201,7 +220,7 @@ const ProfileCard: React.FC<Props> = (props) => {
                   variant="bordered"
                   className={`${match ? 'text-primary-foreground border-primary-foreground' : 'border-primary text-primary'}`}
                 >
-                  本地
+                  {t('profile.local')}
                 </Chip>
               </div>
             )}
@@ -240,7 +259,7 @@ const ProfileCard: React.FC<Props> = (props) => {
                 className="bg-transparent"
                 variant="flat"
                 color="default"
-                title="查看当前运行时配置"
+                title={t('siderCard.runtimeConfig')}
                 onPress={() => {
                   setShowRuntimeConfig(true)
                 }}
@@ -255,7 +274,7 @@ const ProfileCard: React.FC<Props> = (props) => {
             <h3
               className={`text-md font-bold ${match ? 'text-primary-foreground' : 'text-foreground'}`}
             >
-              订阅管理
+              {t('siderCard.subscription')}
             </h3>
           </CardFooter>
         </Card>
